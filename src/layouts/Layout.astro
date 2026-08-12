@@ -63,6 +63,22 @@ const { title, description = '', schema = null } = Astro.props;
   </div>
   <div class="legal">&copy; 2026 Luxury Modules Ltd. All prices are indicative "from" prices excluding VAT, updated January 2026.</div>
 </footer>
+<div id="brochure-modal" role="dialog" aria-modal="true" aria-labelledby="bm-title">
+  <div class="bm-card">
+    <button class="bm-close" aria-label="Close" type="button">&#10005;</button>
+    <div id="brochure-body">
+      <h3 id="bm-title" class="serif">The 2026 brochure &amp; price list</h3>
+      <p>The full price list, what's included module by module, and the process from first call to handover.</p>
+      <form id="brochure-form">
+        <label>First name<input type="text" name="firstname" required autocomplete="given-name" /></label>
+        <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+        <button type="submit">Send me the brochure</button>
+        <p id="bm-err" class="bm-err"></p>
+        <p class="bm-consent">We'll use your details to send the brochure and occasional project stories. No spam, unsubscribe anytime.</p>
+      </form>
+    </div>
+  </div>
+</div>
 <script is:inline>
   if (location.search.indexOf('notes=1') > -1) document.body.classList.add('show-draft-notes');
   var b=document.querySelector('.burger');
@@ -72,6 +88,32 @@ const { title, description = '', schema = null } = Astro.props;
     sb.addEventListener('click',function(e){e.stopPropagation();sp.classList.toggle('open');sb.setAttribute('aria-expanded',sp.classList.contains('open'));});
     document.addEventListener('click',function(e){if(sp.classList.contains('open')&&!sp.contains(e.target)){sp.classList.remove('open');sb.setAttribute('aria-expanded','false');}});
     sp.addEventListener('keydown',function(e){if(e.key==='Escape'){sp.classList.remove('open');sb.setAttribute('aria-expanded','false');sb.focus();}});}
+  var bmodal=document.getElementById('brochure-modal');
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href="#brochure"], .js-brochure');
+    if(a){e.preventDefault();var row=a.closest('.emailcap,.emailrow');var em=row&&row.querySelector('input[type=email]')?row.querySelector('input[type=email]').value:'';
+      if(em)bmodal.querySelector('input[name=email]').value=em;
+      bmodal.classList.add('open');bmodal.querySelector('input[name=firstname]').focus();return;}
+    if(e.target.closest('.bm-close')||e.target===bmodal){bmodal.classList.remove('open');}
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&bmodal.classList.contains('open'))bmodal.classList.remove('open');});
+  var bform=document.getElementById('brochure-form');
+  if(bform){bform.addEventListener('submit',function(e){
+    e.preventDefault();
+    var fn=bform.firstname.value.trim(),em=bform.email.value.trim(),btn=bform.querySelector('button[type=submit]');
+    btn.disabled=true;btn.textContent='Sending…';
+    fetch('https://api-eu1.hsforms.com/submissions/v3/integration/submit/145893440/10337a2d-9ba9-49e8-8cb2-10535dc96348',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fields:[{objectTypeId:'0-1',name:'firstname',value:fn},{objectTypeId:'0-1',name:'email',value:em}],context:{pageUri:location.href,pageName:document.title}})
+    }).then(function(r){
+      if(r.ok){document.getElementById('brochure-body').innerHTML='<h3 class="serif" style="font-size:26px;color:var(--navy)">Thank you, '+fn.replace(/[<>&]/g,'')+'.</h3><p>The brochure is on its way to your inbox.</p>';}
+      else{return r.json().then(function(j){throw new Error((j.errors&&j.errors[0]&&j.errors[0].message)||('HTTP '+r.status));});}
+    }).catch(function(err){
+      btn.disabled=false;btn.textContent='Try again';
+      document.getElementById('bm-err').textContent='Something went wrong — please try again, or email sales@luxurymodules.co.uk.';
+      console.error('Brochure form:',err);
+    });
+  });}
 </script>
 </body>
 </html>

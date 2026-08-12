@@ -44,6 +44,19 @@ nav.main a.cta{margin-top:14px;text-align:center;padding:15px;border-bottom:none
 .navsub-menu{position:static;transform:none;min-width:0;border-top:none;box-shadow:none;background:none;padding:0 0 6px}
 nav.main .navsub-menu a{padding:11px 2px 11px 18px;font-size:14px}
 .navwrap{position:relative}}
+#brochure-modal{display:none;position:fixed;inset:0;background:rgba(22,34,59,.55);z-index:100;align-items:center;justify-content:center;padding:20px}
+#brochure-modal.open{display:flex}
+.bm-card{background:var(--cream);max-width:440px;width:100%;padding:36px;border-top:3px solid var(--gold);position:relative;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.bm-close{position:absolute;top:10px;right:12px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted)}
+.bm-card h3{font-size:26px;color:var(--navy);margin-bottom:8px}
+.bm-card p{font-size:14.5px;color:var(--muted)}
+#brochure-form label{display:block;margin-top:14px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);font-weight:600}
+#brochure-form input{display:block;width:100%;margin-top:6px;padding:11px 12px;border:1px solid #cfc8b8;background:#fff;font-size:15px;font-family:inherit;box-sizing:border-box}
+#brochure-form button[type=submit]{margin-top:18px;width:100%;background:var(--navy);color:#fff;border:none;padding:13px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;cursor:pointer;font-family:inherit}
+#brochure-form button[type=submit]:hover{background:var(--navy2)}
+#brochure-form button[type=submit]:disabled{opacity:.6;cursor:default}
+.bm-err{color:#a32d2d;font-size:13.5px;margin-top:8px}
+.bm-consent{font-size:12px;margin-top:12px}
 .imgph .lbl{display:none}
 body.show-draft-notes .imgph .lbl{display:block}
 .imgph{position:relative;overflow:hidden}
