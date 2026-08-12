@@ -6,7 +6,7 @@
 .pg-contact section{padding:72px 24px}
 .pg-contact .wrap{max-width:1200px;margin:0 auto}
 .pg-contact .kicker{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
-.pg-contact h2{font-size:40px;color:var(--navy);margin-bottom:16px}
+.pg-contact h1, .pg-contact h2{font-size:40px;color:var(--navy);margin-bottom:16px}
 .pg-contact .lead{font-size:19.5px;color:#4b5563;max-width:720px}
 .pg-contact .grid{display:grid;gap:24px}
 .pg-contact .cols3{grid-template-columns:repeat(3,1fr)}

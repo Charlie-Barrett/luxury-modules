@@ -6,7 +6,7 @@
 .pg-qualify section{padding:72px 24px}
 .pg-qualify .wrap{max-width:1200px;margin:0 auto}
 .pg-qualify .kicker{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
-.pg-qualify h2{font-size:40px;color:var(--navy);margin-bottom:16px}
+.pg-qualify h1, .pg-qualify h2{font-size:40px;color:var(--navy);margin-bottom:16px}
 .pg-qualify .lead{font-size:19.5px;color:#4b5563;max-width:720px}
 .pg-qualify .grid{display:grid;gap:24px}
 .pg-qualify .cols3{grid-template-columns:repeat(3,1fr)}
