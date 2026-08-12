@@ -14,9 +14,10 @@ const { title, description = '', schema = null } = Astro.props;
 <meta property="og:title" content={title} />
 {description && <meta property="og:description" content={description} />}
 <meta property="og:type" content="website" />
+<script is:inline id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="d376d24e-91fd-4bff-a1c4-00867f89529e" data-blockingmode="auto" type="text/javascript"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
 {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
-<script is:inline type="text/javascript">
+<script is:inline type="text/plain" data-cookieconsent="statistics">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
