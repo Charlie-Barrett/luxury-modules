@@ -29,20 +29,45 @@
         </div>
       </div>
 
-      <form class="cform" onsubmit="event.preventDefault();this.innerHTML='<h3 style=\'font-family:Cormorant Garamond,serif;font-size:28px;color:var(--navy)\'>Thank you, we\'ll be in touch within one working day.</h3>'">
+      <form class="cform" id="scoping-form">
         <h3 style="font-size:26px;color:var(--navy)">Tell us about your project</h3>
-        <label>Name</label><input type="text" required placeholder="Your name">
-        <label>Email</label><input type="email" required placeholder="you@email.co.uk">
-        <label>Phone</label><input type="tel" placeholder="Optional">
-        <label>Where is your land? (postcode or area)</label><input type="text" placeholder="e.g. IP14, Suffolk, or 'no land yet'">
+        <label>Name</label><input type="text" name="fullname" required placeholder="Your name">
+        <label>Email</label><input type="email" name="email" required placeholder="you@email.co.uk">
+        <label>Phone</label><input type="tel" name="mobilephone" required minlength="7" maxlength="20" placeholder="So we can call you back">
+        <label>Where is your land? (postcode or area)</label><input type="text" name="land" placeholder="e.g. IP14, Suffolk, or 'no land yet'">
         <label>What are you dreaming of?</label>
-        <select><option>Living space / home</option><option>Guest accommodation / holiday let</option><option>Cave sauna / wellness</option><option>Vaulted cellar</option><option>Commercial / resort project</option><option>Something bespoke</option></select>
+        <select name="dream"><option>Living space / home</option><option>Guest accommodation / holiday let</option><option>Cave sauna / wellness</option><option>Vaulted cellar</option><option>Commercial / resort project</option><option>Something bespoke</option></select>
         <label>Budget range</label>
-        <select><option>£25,000 – £75,000</option><option>£75,000 – £150,000</option><option>£150,000+</option><option>Not sure yet</option></select>
-        <label>Anything else?</label><textarea rows="4" placeholder="Planning status, timescales, questions…"></textarea>
+        <select name="budget"><option>£25,000 – £75,000</option><option>£75,000 – £150,000</option><option>£150,000+</option><option>Not sure yet</option></select>
+        <label>Anything else?</label><textarea name="message" rows="4" placeholder="Planning status, timescales, questions…"></textarea>
         <div style="margin-top:26px"><button class="btn" type="submit" style="width:100%">Request my scoping call</button></div>
+        <p id="sf-err" class="bm-err"></p>
         <p style="font-size:12px;color:var(--muted);margin-top:12px">We reply within one working day. Your details are never shared.</p>
       </form>
+      <script>
+      (function(){var f=document.getElementById('scoping-form');if(!f)return;
+        f.addEventListener('submit',function(e){e.preventDefault();
+          var btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Sending…';
+          var msg='Interested in: '+f.dream.value+' | Budget: '+f.budget.value+(f.message.value?' | '+f.message.value:'');
+          fetch('https://api-eu1.hsforms.com/submissions/v3/integration/submit/145893440/3b7e5046-1d07-4772-8424-cc74c8e4e4ab',{
+            method:'POST',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({fields:[
+              {objectTypeId:'0-1',name:'firstname',value:f.fullname.value.trim()},
+              {objectTypeId:'0-1',name:'email',value:f.email.value.trim()},
+              {objectTypeId:'0-1',name:'mobilephone',value:f.mobilephone.value.trim()},
+              {objectTypeId:'0-1',name:'where_is_your_land_postcode_or_area',value:f.land.value.trim()},
+              {objectTypeId:'0-1',name:'tell_us_about_your_project',value:msg}
+            ],context:{pageUri:location.href,pageName:document.title}})
+          }).then(function(r){
+            if(r.ok){f.innerHTML='<h3 style="font-family:Cormorant Garamond,serif;font-size:28px;color:var(--navy)">Thank you, we\'ll be in touch within one working day.</h3>';}
+            else{return r.json().then(function(j){throw new Error((j.errors&&j.errors[0]&&j.errors[0].message)||('HTTP '+r.status));});}
+          }).catch(function(err){
+            btn.disabled=false;btn.textContent='Try again';
+            document.getElementById('sf-err').textContent='Something went wrong — please try again, or call us on +44 7814 550 508.';
+            console.error('Scoping form:',err);
+          });
+        });})();
+      </script>
     </div>
   </div>
 </section>
