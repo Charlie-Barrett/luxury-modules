@@ -2,4 +2,7 @@
 /modules.html /products/ 301
 /contact.html /book-a-call/ 301
 /qualify.html /start-your-project/ 301
+# Legacy live-site URLs — /saunas/ is cited by ChatGPT and carries LM's only organic rankings (GSC: 741 impr, pos 6.4). Do not remove.
+/saunas/ /products/cave-saunas/ 301
+/saunas /products/cave-saunas/ 301
 # Add hobbithouses.co.uk domain redirects here once the consolidation decision is made.

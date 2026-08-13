@@ -117,20 +117,20 @@ function showQualified(){
   };
   document.getElementById('rq-planningline').textContent=P[state.planning];
   const R={
-    b2:[["Vaulted Cellars","4.5–21.4m² · from £25,000",""],
-        ["Cave Saunas","4.5–23.9m² · from £30,000",""],
-        ["Modular 10 / MINI / OPEN","10m² · from £45,000",""]],
-    b3:[["Modular 20 / PLUS 20","20m² · from £75,000",""],
-        ["Modular 30 (A–C)","30m² · from £99,000",""],
-        ["Modular 40 (A–C)","40m² · from £130,000",""]],
-    b4:[["Modular 60 (A–C)","60m² · from £199,000",""],
-        ["Modular 80","80m² · from £275,000",""],
-        ["Modular A &amp; Custom","from £150,000 / £POA",""]]
+    b2:[["Vaulted Cellars","4.5–21.4m² · from £25,000","/images/wine-cellar-interior.webp"],
+        ["Cave Saunas","4.5–23.9m² · from £30,000","/images/sauna-homepage.jpg"],
+        ["Modular 10 / MINI / OPEN","10m² · from £45,000","/images/modular-10-small-living.jpg"]],
+    b3:[["Modular 20 / PLUS 20","20m² · from £75,000","/images/modular-20-small-living.jpg"],
+        ["Modular 30 (A–C)","30m² · from £99,000","/images/modular-30-exterior.jpg"],
+        ["Modular 40 (A–C)","40m² · from £130,000","/images/modular-40-exterior.jpg"]],
+    b4:[["Modular 60 (A–C)","60m² · from £199,000","/images/modular-60-exterior.jpg"],
+        ["Modular 80","80m² · from £275,000","/images/modular-80-hero-image.jpg"],
+        ["Modular A &amp; Custom","from £150,000 / £POA","/images/modular-a-small-living.jpg"]]
   };
   const titles={b2:"Your budget opens the classics.",b3:"Your budget builds a home.",b4:"Your budget builds a legacy."};
   document.getElementById('rq-title').textContent=titles[state.budget];
   document.getElementById('rq-recs').innerHTML=R[state.budget].map(r=>
-    `<div class="rec"><div class="imgph"></div><div class="rb"><b>${r[0]}</b><span>${r[1]}</span></div></div>`).join('');
+    `<div class="rec"><div class="imgph">${r[2]?`<img src="${r[2]}" alt="${r[0]}" style="width:100%;height:100%;object-fit:cover" loading="lazy">`:''}</div><div class="rb"><b>${r[0]}</b><span>${r[1]}</span></div></div>`).join('');
   showResult('res-qualified');
 }
 </script>
