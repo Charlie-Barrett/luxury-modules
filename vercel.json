@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { "source": "/modules.html", "destination": "/products/", "permanent": true },
+    { "source": "/contact.html", "destination": "/book-a-call/", "permanent": true },
+    { "source": "/qualify.html", "destination": "/start-your-project/", "permanent": true },
+    { "source": "/saunas", "destination": "/products/cave-saunas/", "permanent": true },
+    { "source": "/saunas/", "destination": "/products/cave-saunas/", "permanent": true }
+  ]
+}
