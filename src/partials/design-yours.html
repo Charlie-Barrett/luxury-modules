@@ -274,6 +274,17 @@ function successStep(){
 }
 
 /* ---------------- submission ---------------- */
+/* HubSpot needs the hubspotutk cookie to link a submission to an existing
+   contact and to attribute the visit. Without it HubSpot warns that the
+   integration is incomplete. Cookie only exists once the HS tracking script
+   has run and analytics consent is given, so treat it as optional. */
+function hsContext(){
+  const ctx = {pageUri:location.href, pageName:document.title};
+  const m = document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/);
+  if(m) ctx.hutk = m[1];
+  return ctx;
+}
+
 function submitReservation(e){
   e.preventDefault();
   const f = document.getElementById('resForm');
@@ -301,6 +312,10 @@ function submitReservation(e){
     'Interior: ' + i.name + '\n' +
     'Guide band: ' + gbp(b.low) + ' to ' + gbp(b.high) + ' (ex VAT)\n' +
     'Reservation fee to invoice: ' + gbp(RESERVATION_FEE) + '\n' +
+    '\n' +
+    'Name: ' + v('fullname') + '\n' +
+    'Email: ' + v('email') + '\n' +
+    'Phone: ' + v('phone') + '\n' +
     'Installation postcode: ' + v('zip') + '\n' +
     'Customer notes: ' + (v('message') || 'none');
 
@@ -322,7 +337,7 @@ function submitReservation(e){
         {objectTypeId:'0-1', name:'zip',       value:v('zip')},
         {objectTypeId:'0-1', name:'message',   value:spec}
       ],
-      context:{pageUri:location.href, pageName:document.title}
+      context:hsContext()
     })
   }).then(function(res){
     if(res.ok){ go(7); return; }
