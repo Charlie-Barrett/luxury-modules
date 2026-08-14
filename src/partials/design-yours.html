@@ -1,6 +1,6 @@
 <header class="head">
   <h1>Design your <em>prefabricated module</em></h1>
-  <p>Factory built, delivered complete and installed in a matter of hours. Configure your module, see your guide price, and reserve your build slot with a fully refundable fee.</p>
+  <p>Factory built, delivered complete and installed in a matter of hours. Configure your module, see your guide price, and request your build slot with a fully refundable £2,000 reservation.</p>
   <ul class="usp">
     <li>Plug and play install in hours</li>
     <li>Reinforced concrete shell</li>
@@ -24,47 +24,83 @@
   </div>
 </div>
 
-<p class="draftnote">DRAFT v0.1 for internal review (Stu, Jamie, Rose). Guide price bands are placeholders pending verification against the 2026 brochure UK turnkey price list. No live payment processing. Imagery slots carry IMG-CFG reference codes for the proposed imagery list.</p>
+<p class="draftnote">DRAFT v0.2 for internal review (Stu, Jamie, Rose). Guide price bands are placeholders pending verification against the 2026 brochure UK turnkey price list. No payment is processed at this stage — the reserve step raises an internal notification to Stu as step one of invoicing. Two options (Steel roof, Light hexagon) are shown with a render-pending placeholder. Wall finish premiums are £500 flat regardless of module size — flagged as an assumption to confirm before this becomes a price list.</p>
 
 <script>
 /* ------------------------------------------------------------------
    DATA  (guide bands = PLACEHOLDERS, verify against 2026 brochure)
+   img = real asset under /images/, or null = render pending
 ------------------------------------------------------------------- */
 const MODELS = [
   {id:'mini', name:'MINI', size:'10 m²',
    sub:'Private retreat with a full height arched glass entrance. Perfect for guest stays, studio or garden office.',
-   bandLow:48000, bandHigh:56000, img:'IMG-CFG-M1',
-   imgdesc:'Mini exterior render, arched glazed entrance, green roof, lakeside setting'},
+   bandLow:48000, bandHigh:56000,
+   img:'/images/mini-10-small-living.webp',
+   imgdesc:'MINI exterior, arched glazed entrance, timber cladding and living roof'},
   {id:'open', name:'OPEN', size:'10 m²',
    sub:'Entrance door and window combination. The most flexible way to add living space to a garden or plot.',
-   bandLow:48000, bandHigh:56000, img:'IMG-CFG-M2',
-   imgdesc:'Open exterior render, door and window combo, evening lighting, patio setting'},
+   bandLow:48000, bandHigh:56000,
+   img:'/images/open-10-small-living.webp',
+   imgdesc:'OPEN exterior, door and window combination, dark cladding on a stone plinth'},
   {id:'plus', name:'PLUS', size:'20 m²',
    sub:'Two entrances and an extra window. Designed as a standalone home for everyday living.',
-   bandLow:80000, bandHigh:92000, img:'IMG-CFG-M3',
-   imgdesc:'Plus exterior render, twin arched entrances, decked terrace, coastal setting'}
+   bandLow:80000, bandHigh:92000,
+   img:'/images/plus-20-small-living.webp',
+   imgdesc:'PLUS exterior, twin arched entrances, cedar shingle roof and decked terrace'}
 ];
+
 const ROOFS = [
-  {id:'shingle', name:'Wood shingles', sub:'Natural cedar, silvers gracefully with age', premium:0, img:'IMG-CFG-R1'},
-  {id:'green',   name:'Green roof',    sub:'Living sedum blanket, blends into the landscape', premium:0, img:'IMG-CFG-R2'},
-  {id:'steel',   name:'Steel roof',    sub:'Standing seam, crisp contemporary finish', premium:0, img:'IMG-CFG-R3'},
-  {id:'copper',  name:'Copper roof',   sub:'Patinas over decades, the signature premium option', premium:4000, img:'IMG-CFG-R4'}
+  {id:'shingle', name:'Wood shingles', sub:'Natural cedar, silvers gracefully with age', premium:0,
+   img:'/images/small-living-spaces-4.jpg',
+   imgdesc:'Cedar shingle roof over dark vertical timber cladding'},
+  {id:'green',   name:'Green roof',    sub:'Living sedum blanket, blends into the landscape', premium:0,
+   img:'/images/modular-80-exterior.jpg',
+   imgdesc:'Living sedum roof running the full length of the module'},
+  {id:'steel',   name:'Steel roof',    sub:'Standing seam, crisp contemporary finish', premium:0,
+   img:null,
+   imgdesc:'Standing seam steel roof — dedicated render pending'}
 ];
+
 const WALLS = [
-  {id:'darkhex',  name:'Dark hexagon',  sub:'Charcoal sculpted concrete panels', premium:0, img:'IMG-CFG-E1'},
-  {id:'lighthex', name:'Light hexagon', sub:'Pale stone toned concrete panels', premium:0, img:'IMG-CFG-E2'}
+  {id:'darkhex',  name:'Dark hexagon',    sub:'Charcoal sculpted concrete panels', premium:0,
+   img:'/images/modular-60-exterior.jpg',
+   imgdesc:'Charcoal sculpted hexagonal concrete panels with a living roof'},
+  {id:'lighthex', name:'Light hexagon',   sub:'Pale stone toned concrete panels', premium:0,
+   img:null,
+   imgdesc:'Pale stone toned hexagonal panels — dedicated render pending'},
+  {id:'wood',     name:'Wood',            sub:'Vertical timber cladding, warm and natural', premium:500,
+   img:'/images/mini-10-small-living.webp',
+   imgdesc:'Vertical timber cladding across the full elevation'},
+  {id:'brick',    name:'Brick',           sub:'Handmade brick arches, traditional and solid', premium:500,
+   img:'/images/index-3.jpg',
+   imgdesc:'Handmade brick elevation with arched openings and stone surround'},
+  {id:'cotswold', name:'Cotswold stone',  sub:'Honey toned limestone, at home in conservation areas', premium:500,
+   img:'/images/index-1.jpg',
+   imgdesc:'Cotswold limestone elevation with arched glazing, in open countryside'}
 ];
+
 const INTERIORS = [
-  {id:'relax', name:'Relax', sub:'Bed centred layout for guest stays and retreats. Japandi palette, fully furnished.', premium:0, img:'IMG-CFG-I1'},
-  {id:'focus', name:'Focus', sub:'Desk centred layout for work from garden. Japandi palette, fully furnished.', premium:0, img:'IMG-CFG-I2'}
+  {id:'relax', name:'Relax', sub:'Bed centred layout for guest stays and retreats. Japandi palette, fully furnished.', premium:0,
+   img:'/images/hobbit-houses-3.jpg',
+   imgdesc:'Relax layout, bed centred under the vaulted ceiling'},
+  {id:'focus', name:'Focus', sub:'Desk centred layout for work from garden. Japandi palette, fully furnished.', premium:0,
+   img:'/images/garden-office-working-interior.webp',
+   imgdesc:'Focus layout, desk centred with full height glazing'}
 ];
+
 const RESERVATION_FEE = 2000;
+
+/* HubSpot: EU1 portal 145893440. Configurator form GUID — REPLACE before go-live.
+   Set to null to run the flow without posting (draft review mode). */
+const HS_PORTAL = '145893440';
+const HS_FORM   = null; /* e.g. '00000000-0000-0000-0000-000000000000' */
 
 const state = {step:1, model:null, roof:null, wall:null, interior:null, maxVisited:1};
 const gbp = n => '£' + n.toLocaleString('en-GB');
+const esc = s => String(s).replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
 
 /* ------------------------------------------------------------------ */
-const TITLES = {1:'Choose your module',2:'Select your roof',3:'Select your exterior finish',4:'Select your interior',5:'Your module summary',6:'Reserve your build slot'};
+const TITLES = {1:'Choose your module',2:'Select your roof',3:'Select your exterior finish',4:'Select your interior',5:'Your module summary',6:'Request your build slot'};
 
 function pills(){
   const el = document.getElementById('pills');
@@ -79,26 +115,40 @@ function pills(){
   document.getElementById('stepTitle').textContent=TITLES[state.step];
 }
 
+function thumb(o){
+  return o.img
+    ? `<div class="thumb"><img src="${o.img}" alt="${esc(o.name)}" loading="lazy"></div>`
+    : `<div class="thumb pending"><span>RENDER<br>PENDING</span></div>`;
+}
+
 function optCard(o, selId, onpick, extra=''){
   return `<div class="opt ${selId===o.id?'sel':''}" onclick="${onpick}('${o.id}')">
     <div>
       <div class="name">${o.name}${o.size?' <span style="font-weight:400;font-size:13px">· '+o.size+'</span>':''}</div>
       <div class="sub">${o.sub}</div>
-      ${o.premium?`<span class="tag">Adds approx ${gbp(o.premium)} to guide band</span>`:''}
+      ${o.premium?`<span class="tag">Adds ${gbp(o.premium)} to guide band</span>`:''}
+      ${o.img?'':'<span class="tag pendtag">Render pending</span>'}
       ${extra}
     </div>
-    <div class="thumb">${o.img}</div>
+    ${thumb(o)}
   </div>`;
 }
 
-function preview(img, desc){
+function preview(o, descOverride){
+  const desc = descOverride || o.imgdesc || (o.name+' exterior');
+  if(!o.img){
+    return `<div class="right">
+      <div class="preview">
+        <div class="imgref">Exterior view</div>
+        <div class="serif" style="font-size:20px;color:#fff">Render pending</div>
+        <div class="desc">${esc(desc)}</div>
+      </div>
+      <div class="viewnote">Exterior view</div>
+    </div>`;
+  }
   return `<div class="right">
-    <div class="preview">
-      <div class="imgref">${img}</div>
-      <div class="serif" style="font-size:20px;color:#fff">Image placeholder</div>
-      <div class="desc">${desc}</div>
-    </div>
-    <div class="viewtabs"><button class="on">Exterior view</button><button>Inside view</button><button>Top view</button></div>
+    <div class="preview haspic"><img src="${o.img}" alt="${esc(desc)}"></div>
+    <div class="viewnote">Exterior view · ${esc(desc)}</div>
   </div>`;
 }
 
@@ -117,7 +167,7 @@ function pickerStep(list, key, q){
       <div class="q">${q}</div>
       ${list.map(o=>optCard(o, sel, 'pick_'+key)).join('')}
     </div>
-    ${preview(cur.img, cur.imgdesc || (cur.name+' option render'))}
+    ${preview(cur)}
   </div>` + controls('Next', !!sel);
 }
 
@@ -128,20 +178,26 @@ window.pick_interior= id=>{state.interior=id;render();};
 
 function bandFor(){
   const m = MODELS.find(x=>x.id===state.model);
-  const prem = (ROOFS.find(x=>x.id===state.roof)?.premium)||0;
+  const prem = ((ROOFS.find(x=>x.id===state.roof)||{}).premium||0)
+             + ((WALLS.find(x=>x.id===state.wall)||{}).premium||0);
   return {low:m.bandLow+prem, high:m.bandHigh+prem};
 }
 
-function summaryStep(){
+function specLines(){
   const m=MODELS.find(x=>x.id===state.model), r=ROOFS.find(x=>x.id===state.roof),
         w=WALLS.find(x=>x.id===state.wall), i=INTERIORS.find(x=>x.id===state.interior);
   const b=bandFor();
+  return {m,r,w,i,b};
+}
+
+function summaryStep(){
+  const {m,r,w,i,b} = specLines();
   return `<div class="body" style="grid-template-columns:1fr 1fr">
     <div class="left">
       <div class="q">Here is your specification. Your guide price band covers the module fully installed: delivery, crane, base preparation and commissioning by our UK team.</div>
       <div class="sumrow"><span class="k">Model</span><span class="v">${m.name} · ${m.size}</span></div>
       <div class="sumrow"><span class="k">Roof</span><span class="v">${r.name}</span></div>
-      <div class="sumrow"><span class="k">Exterior</span><span class="v">${w.name}</span></div>
+      <div class="sumrow"><span class="k">Exterior</span><span class="v">${w.name}${w.premium?' · +'+gbp(w.premium):''}</span></div>
       <div class="sumrow"><span class="k">Interior</span><span class="v">${i.name} · Japandi, fully furnished</span></div>
       <div class="sumrow"><span class="k">Warranty</span><span class="v">25 year structural</span></div>
       <div class="band">
@@ -149,39 +205,50 @@ function summaryStep(){
         <div class="price">${gbp(b.low)} to ${gbp(b.high)}</div>
         <div class="note">Excludes VAT. Your fixed quotation is confirmed after a site survey covering access, ground conditions and delivery distance.</div>
       </div>
-      <div class="surveynote"><span>ⓘ</span><span><b>Why a band and not a fixed price?</b> Every plot is different. The survey removes the guesswork, and your reservation fee locks this band while we complete it.</span></div>
+      <div class="surveynote"><span>ⓘ</span><span><b>Why a band and not a fixed price?</b> Every plot is different. The survey removes the guesswork, and your reservation locks this band while we complete it.</span></div>
     </div>
-    ${preview(m.img, 'Configured module hero render: '+m.name+' with '+r.name.toLowerCase()+', '+w.name.toLowerCase()+' exterior')}
-  </div>` + controls('Reserve your build slot', true);
+    ${preview(m, m.name+' with '+r.name.toLowerCase()+' and '+w.name.toLowerCase()+' exterior')}
+  </div>` + controls('Request your build slot', true);
 }
 
 function reserveStep(){
-  const m=MODELS.find(x=>x.id===state.model);
-  const b=bandFor();
+  const {m,r,w,i,b} = specLines();
   return `<div class="body" style="display:block">
     <div style="padding:28px 30px">
     <div class="resgrid">
       <div>
-        <div class="q">Production slots are released quarterly and allocated in reservation order. A fixed, fully refundable fee of ${gbp(RESERVATION_FEE)} secures yours.</div>
+        <div class="q">Production slots are released quarterly and allocated in reservation order. A fixed, fully refundable fee of ${gbp(RESERVATION_FEE)} secures yours. Confirm your specification below and we will issue your reservation invoice.</div>
         <ul class="steps-included">
-          <li><span class="n">1</span><span><b>Your build slot is locked.</b> ${m.name} specification and the ${gbp(b.low)} to ${gbp(b.high)} guide band are held for you.</span></li>
-          <li><span class="n">2</span><span><b>Site survey within 14 days.</b> We visit your plot, confirm access and base requirements, and issue your fixed quotation.</span></li>
-          <li><span class="n">3</span><span><b>You decide.</b> Accept the quotation and the ${gbp(RESERVATION_FEE)} is credited in full against your balance. Or walk away and it is refunded in full.</span></li>
+          <li><span class="n">1</span><span><b>You confirm your specification.</b> Your ${m.name} build and the ${gbp(b.low)} to ${gbp(b.high)} guide band are logged against your name.</span></li>
+          <li><span class="n">2</span><span><b>We issue your reservation invoice.</b> One working day. ${gbp(RESERVATION_FEE)}, payable by bank transfer. Your slot is provisionally held from the moment you confirm.</span></li>
+          <li><span class="n">3</span><span><b>Site survey within 14 days of payment.</b> We visit your plot, confirm access and base requirements, and issue your fixed quotation.</span></li>
+          <li><span class="n">4</span><span><b>You decide.</b> Accept the quotation and the ${gbp(RESERVATION_FEE)} is credited in full against your balance. Or walk away and it is refunded in full.</span></li>
         </ul>
-        <p class="legal">The reservation fee is fully refundable until you accept your fixed quotation. You also have a statutory 14 day cancellation right under the Consumer Contracts Regulations 2013. Nothing is owed beyond the fee until you sign your build agreement.</p>
+        <p class="legal">No payment is taken on this page. The reservation fee is invoiced separately and is fully refundable until you accept your fixed quotation. You also have a statutory 14 day cancellation right under the Consumer Contracts Regulations 2013. Nothing is owed beyond the fee until you sign your build agreement.</p>
       </div>
       <div class="paybox">
-        <h3>Reserve now</h3>
-        <div class="fee">${gbp(RESERVATION_FEE)} <small>fully refundable</small></div>
-        <div class="field"><label>Full name</label><input placeholder="Your name"></div>
-        <div class="field"><label>Email</label><input placeholder="you@email.com"></div>
-        <div class="field"><label>Card number</label><input placeholder="1234 5678 9012 3456"></div>
-        <div class="cardrow">
-          <div class="field" style="flex:1"><label>Expiry</label><input placeholder="MM/YY"></div>
-          <div class="field" style="flex:1"><label>CVC</label><input placeholder="123"></div>
+        <h3>Confirm your specification</h3>
+        <div class="fee">${gbp(RESERVATION_FEE)} <small>invoiced separately · fully refundable</small></div>
+
+        <div class="specrecap">
+          <div><span>Model</span><b>${m.name} · ${m.size}</b></div>
+          <div><span>Roof</span><b>${r.name}</b></div>
+          <div><span>Exterior</span><b>${w.name}</b></div>
+          <div><span>Interior</span><b>${i.name}</b></div>
+          <div><span>Guide band</span><b>${gbp(b.low)} – ${gbp(b.high)}</b></div>
         </div>
-        <button class="btn gold" style="width:100%;margin-top:16px" onclick="go(7)">Pay ${gbp(RESERVATION_FEE)} and reserve</button>
-        <div class="demo">Demo only. No payment is taken.</div>
+
+        <form id="resForm" novalidate>
+          <div class="field"><label for="rf-name">Full name</label><input id="rf-name" name="fullname" required placeholder="Your name" autocomplete="name"></div>
+          <div class="field"><label for="rf-email">Email</label><input id="rf-email" name="email" type="email" required placeholder="you@email.com" autocomplete="email"></div>
+          <div class="field"><label for="rf-phone">Phone</label><input id="rf-phone" name="phone" type="tel" required placeholder="07000 000000" autocomplete="tel"></div>
+          <div class="field"><label for="rf-post">Installation postcode</label><input id="rf-post" name="zip" required placeholder="GL54 1AA" autocomplete="postal-code"></div>
+          <div class="field"><label for="rf-notes">Anything we should know (optional)</label><input id="rf-notes" name="message" placeholder="Access, timescales, site notes"></div>
+          <label class="consent"><input type="checkbox" id="rf-consent" required><span>I confirm this specification and would like Luxury Modules to issue my ${gbp(RESERVATION_FEE)} reservation invoice.</span></label>
+          <div class="formerr" id="rf-err"></div>
+          <button class="btn gold" style="width:100%;margin-top:14px" type="submit">Confirm and request my invoice</button>
+        </form>
+        <div class="demo">No card details are collected. Your invoice is issued by email.</div>
       </div>
     </div>
     </div>
@@ -189,15 +256,84 @@ function reserveStep(){
 }
 
 function successStep(){
-  const m=MODELS.find(x=>x.id===state.model);
+  const {m,r,w,i,b} = specLines();
   return `<div class="success">
     <div class="tick">✓</div>
-    <h2>Your ${m.name} build slot is reserved</h2>
-    <p>A confirmation email is on its way with your specification, guide price band and receipt. Our team will contact you within one working day to arrange your site survey. Your fee is fully refundable until you accept your fixed quotation.</p>
+    <h2>Your ${m.name} specification is confirmed</h2>
+    <p>Thank you. Stuart has been notified and your reservation invoice for ${gbp(RESERVATION_FEE)} will be issued by email within one working day. Your build slot is provisionally held in the meantime. The fee is fully refundable until you accept your fixed quotation.</p>
+    <div class="successspec">
+      <div><span>Model</span><b>${m.name} · ${m.size}</b></div>
+      <div><span>Roof</span><b>${r.name}</b></div>
+      <div><span>Exterior</span><b>${w.name}</b></div>
+      <div><span>Interior</span><b>${i.name}</b></div>
+      <div><span>Guide band</span><b>${gbp(b.low)} – ${gbp(b.high)}</b></div>
+    </div>
     <button class="btn gold" style="margin-top:24px" onclick="location.reload()">Design another module</button>
   </div>`;
 }
 
+/* ---------------- submission ---------------- */
+function submitReservation(e){
+  e.preventDefault();
+  const f = document.getElementById('resForm');
+  const err = document.getElementById('rf-err');
+  const btn = f.querySelector('button[type=submit]');
+  const v = k => (f.elements[k] ? f.elements[k].value.trim() : '');
+  err.textContent = '';
+
+  if(!v('fullname') || !v('email') || !v('phone') || !v('zip')){
+    err.textContent = 'Please complete your name, email, phone and postcode.'; return;
+  }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('email'))){
+    err.textContent = 'Please enter a valid email address.'; return;
+  }
+  if(!document.getElementById('rf-consent').checked){
+    err.textContent = 'Please confirm your specification to continue.'; return;
+  }
+
+  const {m,r,w,i,b} = specLines();
+  const spec =
+    'MODULE CONFIGURATOR — RESERVATION REQUEST\n' +
+    'Model: ' + m.name + ' (' + m.size + ')\n' +
+    'Roof: ' + r.name + '\n' +
+    'Exterior: ' + w.name + (w.premium ? ' (+' + gbp(w.premium) + ')' : '') + '\n' +
+    'Interior: ' + i.name + '\n' +
+    'Guide band: ' + gbp(b.low) + ' to ' + gbp(b.high) + ' (ex VAT)\n' +
+    'Reservation fee to invoice: ' + gbp(RESERVATION_FEE) + '\n' +
+    'Installation postcode: ' + v('zip') + '\n' +
+    'Customer notes: ' + (v('message') || 'none');
+
+  btn.disabled = true; btn.textContent = 'Sending…';
+
+  if(!HS_FORM){
+    console.log('[configurator] HS_FORM not set — draft mode, payload:\n' + spec);
+    go(7); return;
+  }
+
+  fetch('https://api-eu1.hsforms.com/submissions/v3/integration/submit/' + HS_PORTAL + '/' + HS_FORM, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      fields:[
+        {objectTypeId:'0-1', name:'firstname', value:v('fullname').split(' ')[0]},
+        {objectTypeId:'0-1', name:'lastname',  value:v('fullname').split(' ').slice(1).join(' ') || v('fullname')},
+        {objectTypeId:'0-1', name:'email',     value:v('email')},
+        {objectTypeId:'0-1', name:'phone',     value:v('phone')},
+        {objectTypeId:'0-1', name:'zip',       value:v('zip')},
+        {objectTypeId:'0-1', name:'message',   value:spec}
+      ],
+      context:{pageUri:location.href, pageName:document.title}
+    })
+  }).then(function(res){
+    if(res.ok){ go(7); return; }
+    return res.json().then(function(j){ throw new Error((j.errors&&j.errors[0]&&j.errors[0].message)||('HTTP '+res.status)); });
+  }).catch(function(ex){
+    btn.disabled=false; btn.textContent='Try again';
+    err.textContent='Something went wrong — please try again, or email sales@luxurymodules.co.uk.';
+    console.error('Reservation form:', ex);
+  });
+}
+
+/* ---------------- render ---------------- */
 function render(){
   const stage=document.getElementById('stage');
   if(state.step===1) stage.innerHTML=pickerStep(MODELS,'model','Choose your favourite shape. All three share the same reinforced concrete shell and arrive fully furnished.');
@@ -205,8 +341,8 @@ function render(){
   if(state.step===3) stage.innerHTML=pickerStep(WALLS,'wall','Select the exterior wall finish for your module.');
   if(state.step===4) stage.innerHTML=pickerStep(INTERIORS,'interior','Select your preferred interior layout. Both are high quality Japandi interiors, delivered fully furnished.');
   if(state.step===5) stage.innerHTML=summaryStep();
-  if(state.step===6) stage.innerHTML=reserveStep();
-  if(state.step===7){ stage.innerHTML=successStep(); document.getElementById('stepTitle').textContent='Reservation confirmed'; document.getElementById('pills').innerHTML=''; return; }
+  if(state.step===6){ stage.innerHTML=reserveStep(); document.getElementById('resForm').addEventListener('submit', submitReservation); }
+  if(state.step===7){ stage.innerHTML=successStep(); document.getElementById('stepTitle').textContent='Specification confirmed'; document.getElementById('pills').innerHTML=''; return; }
   pills();
 }
 
