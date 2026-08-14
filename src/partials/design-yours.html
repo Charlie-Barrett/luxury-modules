@@ -90,10 +90,11 @@ const INTERIORS = [
 
 const RESERVATION_FEE = 2000;
 
-/* HubSpot: EU1 portal 145893440. Configurator form GUID — REPLACE before go-live.
-   Set to null to run the flow without posting (draft review mode). */
+/* HubSpot: EU1 portal 145893440, "Configurator — Reservation Request" form.
+   Internal notification to Stu is configured in the HubSpot form settings,
+   not here. Set HS_FORM to null to run the flow without posting (draft mode). */
 const HS_PORTAL = '145893440';
-const HS_FORM   = null; /* e.g. '00000000-0000-0000-0000-000000000000' */
+const HS_FORM   = 'eb1394d1-5039-405c-9fc6-036fa8da33d3';
 
 const state = {step:1, model:null, roof:null, wall:null, interior:null, maxVisited:1};
 const gbp = n => '£' + n.toLocaleString('en-GB');
@@ -325,10 +326,15 @@ function submitReservation(e){
     })
   }).then(function(res){
     if(res.ok){ go(7); return; }
-    return res.json().then(function(j){ throw new Error((j.errors&&j.errors[0]&&j.errors[0].message)||('HTTP '+res.status)); });
+    return res.json().then(function(j){
+      /* HubSpot 400s if a submitted field is not defined on the form.
+         Log every field error so a form/field mismatch is obvious in console. */
+      if(j && j.errors) j.errors.forEach(function(e){ console.error('HubSpot:', e.errorType, e.message); });
+      throw new Error((j.errors&&j.errors[0]&&j.errors[0].message)||('HTTP '+res.status));
+    });
   }).catch(function(ex){
     btn.disabled=false; btn.textContent='Try again';
-    err.textContent='Something went wrong — please try again, or email sales@luxurymodules.co.uk.';
+    err.textContent='Something went wrong — please try again, or call us on the number above.';
     console.error('Reservation form:', ex);
   });
 }
