@@ -1,0 +1,10 @@
+# luxurymodules.co.uk
+# Static Astro build on Vercel. Everything public is crawlable.
+
+User-agent: *
+Allow: /
+
+# Vercel's own preview deployments are noindexed by the platform via
+# X-Robots-Tag, so no Disallow rules are needed for them here.
+
+Sitemap: https://luxurymodules.co.uk/sitemap-index.xml

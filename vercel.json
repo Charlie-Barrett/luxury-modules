@@ -1,9 +1,54 @@
 {
+  "trailingSlash": true,
   "redirects": [
     { "source": "/modules.html", "destination": "/products/", "permanent": true },
     { "source": "/contact.html", "destination": "/book-a-call/", "permanent": true },
     { "source": "/qualify.html", "destination": "/start-your-project/", "permanent": true },
+
     { "source": "/saunas", "destination": "/products/cave-saunas/", "permanent": true },
-    { "source": "/saunas/", "destination": "/products/cave-saunas/", "permanent": true }
+    { "source": "/saunas/", "destination": "/products/cave-saunas/", "permanent": true },
+    { "source": "/saunas/feed/", "destination": "/products/cave-saunas/", "permanent": true },
+
+    { "source": "/spaces", "destination": "/products/", "permanent": false },
+    { "source": "/spaces/", "destination": "/products/", "permanent": false },
+
+    { "source": "/author/website-admin", "destination": "/", "permanent": true },
+    { "source": "/author/website-admin/", "destination": "/", "permanent": true },
+    { "source": "/author/:slug*", "destination": "/", "permanent": true },
+    { "source": "/feed/", "destination": "/", "permanent": true },
+
+    { "source": "/sitemap_index.xml", "destination": "/sitemap-index.xml", "permanent": true },
+    { "source": "/page-sitemap.xml", "destination": "/sitemap-index.xml", "permanent": true },
+    { "source": "/wp-sitemap.xml", "destination": "/sitemap-index.xml", "permanent": true },
+
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-1.jpg", "destination": "/images/sauna-interior.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-2.jpg", "destination": "/images/sauna-exterior.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-4.jpg", "destination": "/images/sauna-spa-room.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-7.jpg", "destination": "/images/sauna-interior.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-8.jpg", "destination": "/images/sauna-exterior.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-9.jpg", "destination": "/images/sauna-spa-room.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-10.jpg", "destination": "/images/sauna-homepage.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-11.jpg", "destination": "/images/sauna-interior.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-12.jpg", "destination": "/images/sauna-spa-room.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Underground-Sauna-13.jpg", "destination": "/images/sauna-exterior.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/01/Underground-Garden-Sauna.jpg", "destination": "/images/sauna-exterior.webp", "permanent": true },
+
+    { "source": "/wp-content/uploads/2025/01/Prefab-Hobbit-House.jpg", "destination": "/images/small-living-spaces-1.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/01/Hobbit-Home-UK.png", "destination": "/images/hobbit-houses-1.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/01/Inside-Hobbit-Home.jpg", "destination": "/images/prefab-house-interior.webp", "permanent": true },
+    { "source": "/wp-content/uploads/2025/11/Luxury-Modules-Earth-Sheltered-Hobbit-Style-Round-Door-Entrance.jpg", "destination": "/images/hobbit-houses-2.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/11/Luxury-Modules-Earth-Sheltered-House-Round-Door-Facade.jpg", "destination": "/images/hobbit-houses-3.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/11/Luxury-Modules-Earth-Sheltered-Underground-House-Winter-Exterior.jpg", "destination": "/images/hobbit-houses-4.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/11/Luxury-Modules-Underground-Lodge-Arched-Doors-Patio-Hot-Tub.jpg", "destination": "/images/garden-room-exterior.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/11/Luxury-Modules-Vaulted-Underground-Home-Interior-Dining-Lounge.jpg", "destination": "/images/modular-60-interior.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/11/Luxury-Modules-Underground-Home-Aerial-Lakeside-Green-Roof.jpg", "destination": "/images/hobbit-houses-1.jpg", "permanent": true },
+
+    { "source": "/wp-content/uploads/2025/09/Luxury-Modules-150px.png", "destination": "/images/luxury-modules-logo-150px.png", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Luxury-Modules-75px.png", "destination": "/images/luxury-modules-logo-150px.png", "permanent": true },
+    { "source": "/wp-content/uploads/2025/09/Luxury-Modules-Dark.png", "destination": "/images/luxury-modules-logo-150px.png", "permanent": true },
+
+    { "source": "/wp-content/uploads/2025/01/Hobbit-House-Consultation.png", "destination": "/images/revonia-module-delivery.jpg", "permanent": true },
+    { "source": "/wp-content/uploads/2025/01/Hobbit-House-Design.png", "destination": "/images/revonia-house-solution-concept-2026-5-.png", "permanent": true },
+    { "source": "/wp-content/uploads/2025/01/Hobbit-House-Construction.png", "destination": "/images/revonia-module-craning.jpg", "permanent": true }
   ]
 }

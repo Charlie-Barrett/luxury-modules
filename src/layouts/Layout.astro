@@ -1,7 +1,31 @@
 ---
 import '../styles/chrome.css';
-interface Props { title: string; description?: string; schema?: object | null; }
-const { title, description = '', schema = null } = Astro.props;
+interface Props {
+  title: string;
+  description?: string;
+  schema?: object | null;
+  /* Social card. `image` is a site-root path (/images/foo.jpg) — resolved to an
+     absolute URL below because Facebook, LinkedIn, WhatsApp and X all reject
+     relative og:image values. `share` is the sentence shown under the card;
+     it falls back to the meta description when a page has nothing bespoke.
+     `imageAlt` describes the picture itself for screen readers on X. */
+  image?: string;
+  imageAlt?: string;
+  share?: string;
+  /* 404 and any future thank-you/utility page: keep it out of the index. */
+  noindex?: boolean;
+}
+const {
+  title,
+  description = '',
+  schema = null,
+  image = '/images/index-1.jpg',
+  imageAlt = 'A Luxury Modules earth-sheltered building, grass roof settled into the landscape',
+  share = '',
+  noindex = false,
+} = Astro.props;
+const ogImage = new URL(image, Astro.site).href;
+const ogDescription = share || description;
 ---
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -10,10 +34,21 @@ const { title, description = '', schema = null } = Astro.props;
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{title}</title>
 {description && <meta name="description" content={description} />}
+{noindex && <meta name="robots" content="noindex, follow" />}
 <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 <meta property="og:title" content={title} />
-{description && <meta property="og:description" content={description} />}
+{ogDescription && <meta property="og:description" content={ogDescription} />}
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="Luxury Modules" />
+<meta property="og:locale" content="en_GB" />
+<meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+{ogDescription && <meta name="twitter:description" content={ogDescription} />}
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={imageAlt} />
 <script is:inline id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="d376d24e-91fd-4bff-a1c4-00867f89529e" data-blockingmode="auto" type="text/javascript"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
 {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
@@ -26,7 +61,6 @@ const { title, description = '', schema = null } = Astro.props;
 </script>
 </head>
 <body>
-<div class="draftbar">Draft build &middot; not live &middot; Luxury Modules</div>
 <header class="site">
   <div class="navwrap">
     <a href="/" style="display:flex;align-items:center;gap:14px;text-decoration:none" aria-label="Luxury Modules home"><img src="/images/luxury-modules-logo-150px.png" alt="Luxury Modules" style="height:46px;width:auto" onerror="this.style.display='none'" /><div class="logo"><span class="lm">LUXURY MODULES</span><span class="tag">Official UK Partner of Revonia</span></div></a>

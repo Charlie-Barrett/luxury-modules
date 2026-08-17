@@ -12,7 +12,7 @@
 .pg-design-yours,.pg-design-yours *,.pg-design-yours *::before,.pg-design-yours *::after{margin:0;padding:0;box-sizing:border-box}
 .pg-design-yours{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;font-size:17px;
   /* Single source of truth for the sticky-header offset. header.site is the only
-     sticky element (.draftbar is static and scrolls away): navwrap 14px padding
+     sticky element on the page: navwrap 14px padding
      x2 + 46px logo = ~74px, plus 12px breathing room. The JS measures the header
      live rather than trusting this, so the two cannot drift apart. */
   --sticky-top:86px}
