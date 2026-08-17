@@ -1,6 +1,13 @@
 :root{
   --navy:#16223b; --navy2:#1d2c4d; --gold:#c9a24b; --gold2:#e0bc6a;
   --cream:#f6f1e7; --ink:#2a2a2a; --muted:#6b7280; --green:#4a5d43;
+  /* Added Aug 2026: these four were referenced by design-yours.css but never
+     defined anywhere, so every `border:1px solid var(--line)` was invalid at
+     computed-value time and rendered as no border at all. */
+  --line:#e5e0d5;      /* hairline rules — matches the 1px borders in components.css */
+  --white:#ffffff;
+  --gold-dark:#8a6d24; /* darker gold for text on cream, AA contrast */
+  --ok:#4a5d43;        /* success green, same as --green */
 }
 body{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;font-size:17px}
 h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600}
