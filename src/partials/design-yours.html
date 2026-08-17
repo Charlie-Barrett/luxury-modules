@@ -135,8 +135,14 @@ function optCard(o, selId, onpick, extra=''){
   </div>`;
 }
 
-function preview(o, descOverride){
+/* indicative=true adds an honesty caveat. The summary step shows only the model's
+   own photograph — it does not composite the chosen roof and wall finish — so the
+   caption would otherwise describe a combination the image does not actually show. */
+function preview(o, descOverride, indicative){
   const desc = descOverride || o.imgdesc || (o.name+' exterior');
+  const caveat = indicative
+    ? `<div class="indicative">Indicative image — not a render of your exact combination. Your chosen roof and exterior finish are the ones listed in your specification.</div>`
+    : '';
   if(!o.img){
     return `<div class="right">
       <div class="preview">
@@ -145,11 +151,13 @@ function preview(o, descOverride){
         <div class="desc">${esc(desc)}</div>
       </div>
       <div class="viewnote">Exterior view</div>
+      ${caveat}
     </div>`;
   }
   return `<div class="right">
     <div class="preview haspic"><img src="${o.img}" alt="${esc(desc)}"></div>
     <div class="viewnote">Exterior view · ${esc(desc)}</div>
+    ${caveat}
   </div>`;
 }
 
@@ -193,7 +201,9 @@ function specLines(){
 
 function summaryStep(){
   const {m,r,w,i,b} = specLines();
-  return `<div class="body" style="grid-template-columns:1fr 1fr">
+  /* NB: this used to be an inline style="grid-template-columns:1fr 1fr", which beat
+     the max-width:920px media query and forced two cramped columns on phones. */
+  return `<div class="body sumbody">
     <div class="left">
       <div class="q">Here is your specification. Your guide price band covers the module fully installed: delivery, crane, base preparation and commissioning by our UK team.</div>
       <div class="sumrow"><span class="k">Model</span><span class="v">${m.name} · ${m.size}</span></div>
@@ -208,14 +218,14 @@ function summaryStep(){
       </div>
       <div class="surveynote"><span>ⓘ</span><span><b>Why a band and not a fixed price?</b> Every plot is different. The survey removes the guesswork, and your reservation locks this band while we complete it.</span></div>
     </div>
-    ${preview(m, m.name+' with '+r.name.toLowerCase()+' and '+w.name.toLowerCase()+' exterior')}
+    ${preview(m, m.name+' with '+r.name.toLowerCase()+' and '+w.name.toLowerCase()+' exterior', true)}
   </div>` + controls('Request your build slot', true);
 }
 
 function reserveStep(){
   const {m,r,w,i,b} = specLines();
-  return `<div class="body" style="display:block">
-    <div style="padding:28px 30px">
+  return `<div class="body resbody">
+    <div class="respad">
     <div class="resgrid">
       <div>
         <div class="q">Production slots are released quarterly and allocated in reservation order. A fixed, fully refundable fee of ${gbp(RESERVATION_FEE)} secures yours. Confirm your specification below and we will issue your reservation invoice.</div>
@@ -225,7 +235,7 @@ function reserveStep(){
           <li><span class="n">3</span><span><b>Site survey within 14 days of payment.</b> We visit your plot, confirm access and base requirements, and issue your fixed quotation.</span></li>
           <li><span class="n">4</span><span><b>You decide.</b> Accept the quotation and the ${gbp(RESERVATION_FEE)} is credited in full against your balance. Or walk away and it is refunded in full.</span></li>
         </ul>
-        <p class="legal">No payment is taken on this page. The reservation fee is invoiced separately and is fully refundable until you accept your fixed quotation. You also have a statutory 14 day cancellation right under the Consumer Contracts Regulations 2013. Nothing is owed beyond the fee until you sign your build agreement.</p>
+        <p class="legalnote">No payment is taken on this page. The reservation fee is invoiced separately and is fully refundable until you accept your fixed quotation. You also have a statutory 14 day cancellation right under the Consumer Contracts Regulations 2013. Nothing is owed beyond the fee until you sign your build agreement.</p>
       </div>
       <div class="paybox">
         <h3>Confirm your specification</h3>
@@ -253,7 +263,7 @@ function reserveStep(){
       </div>
     </div>
     </div>
-  </div>` + `<div class="controls"><button class="btn ghost" onclick="go(5)">Back to summary</button><span></span></div>`;
+  </div>` + `<div class="controls backonly"><button class="btn ghost" onclick="go(5)">Back to summary</button></div>`;
 }
 
 function successStep(){
@@ -367,12 +377,26 @@ function render(){
   pills();
 }
 
+/* Scroll to the top of the configurator card, not the top of the document.
+   Scrolling to 0 dumped the user back at the hero on every step, so on mobile
+   the new step title and options were a full screen below the fold. Offset by
+   the sticky site header (draft bar + nav) so the step title is not hidden. */
+function scrollToCard(){
+  const card = document.querySelector('.pg-design-yours .card');
+  if(!card) return;
+  const header = document.querySelector('header.site');
+  const offset = (header ? header.getBoundingClientRect().height : 0) + 12;
+  const y = window.scrollY + card.getBoundingClientRect().top - offset;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({top:Math.max(0,y), behavior: reduce ? 'auto' : 'smooth'});
+}
+
 function go(n){
   if(n<1||n>7) return;
   state.step=n;
   state.maxVisited=Math.max(state.maxVisited,Math.min(n,6));
   render();
-  window.scrollTo({top:0,behavior:'smooth'});
+  scrollToCard();
 }
 
 render();

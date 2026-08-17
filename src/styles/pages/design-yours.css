@@ -1,4 +1,21 @@
-.pg-design-yours{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;font-size:17px}
+/* Reset, scoped to this page.
+   The `*{margin:0;padding:0;box-sizing:border-box}` rule lives in components.css,
+   which design-yours.astro does not import (7 other pages don't either — see note
+   below). Without it this page ran on content-box, so every `width:100%` input in
+   the reservation form overflowed its box by padding+border, and UA margins were
+   live on h1/p/ul.
+
+   Deliberately scoped rather than moved into chrome.css: index, turnkey,
+   hobbit-houses and small-living-spaces size their hero inners with
+   `max-width:1200px; padding:0 24px`, which border-box would narrow by 48px.
+   Those pages need their own review before a site-wide reset. */
+.pg-design-yours,.pg-design-yours *,.pg-design-yours *::before,.pg-design-yours *::after{margin:0;padding:0;box-sizing:border-box}
+.pg-design-yours{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;font-size:17px;
+  /* Single source of truth for the sticky-header offset. header.site is the only
+     sticky element (.draftbar is static and scrolls away): navwrap 14px padding
+     x2 + 46px logo = ~74px, plus 12px breathing room. The JS measures the header
+     live rather than trusting this, so the two cannot drift apart. */
+  --sticky-top:86px}
 .pg-design-yours h1, .pg-design-yours h2, .pg-design-yours h3, .pg-design-yours .serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600}
 .pg-design-yours .head{background:var(--navy);color:#fff;padding:40px 32px 92px;text-align:center}
 .pg-design-yours .head h1{font-size:clamp(28px,4vw,42px);font-weight:600}
@@ -8,7 +25,10 @@
 .pg-design-yours .usp li{list-style:none;display:flex;align-items:center;gap:7px}
 .pg-design-yours .usp li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);flex:0 0 auto}
 .pg-design-yours .shell{max-width:1180px;margin:-56px auto 60px;padding:0 24px}
-.pg-design-yours .card{background:var(--white);border-radius:10px;box-shadow:0 14px 40px rgba(13,33,55,.12);overflow:hidden}
+/* overflow:clip rather than hidden — hidden makes the card a scroll container,
+   which silently kills position:sticky on the preview column and step controls.
+   clip does the same visual trimming without creating one. */
+.pg-design-yours .card{background:var(--white);border-radius:10px;box-shadow:0 14px 40px rgba(13,33,55,.12);overflow:hidden;overflow:clip;scroll-margin-top:var(--sticky-top)}
 .pg-design-yours .stepbar{display:flex;align-items:center;justify-content:space-between;padding:22px 30px;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:14px}
 .pg-design-yours .stepbar .title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy)}
 .pg-design-yours .pills{display:flex;gap:8px;align-items:center}
@@ -16,10 +36,13 @@
 .pg-design-yours .pill.done{border-color:var(--gold);color:var(--gold-dark);cursor:pointer}
 .pg-design-yours .pill.now{background:var(--gold);border-color:var(--gold);color:var(--navy)}
 .pg-design-yours .body{display:grid;grid-template-columns:440px 1fr;min-height:520px}
-@media(max-width:920px){.pg-design-yours .body{grid-template-columns:1fr}}
+.pg-design-yours .sumbody{grid-template-columns:1fr 1fr}
+.pg-design-yours .resbody{display:block;min-height:0}
+.pg-design-yours .respad{padding:28px 30px}
 .pg-design-yours .left{padding:28px 30px;border-right:1px solid var(--line)}
-@media(max-width:920px){.pg-design-yours .left{border-right:none;border-bottom:1px solid var(--line)}}
-.pg-design-yours .left .q{font-size:15px;color:var(--muted);margin-bottom:18px}
+/* not .left .q — the reserve step's intro .q sits outside .left and was falling
+   back to inherited 17px body text with no bottom margin */
+.pg-design-yours .q{font-size:15px;color:var(--muted);margin-bottom:18px}
 .pg-design-yours .opt{border:1.5px solid var(--line);border-radius:8px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px;cursor:pointer;transition:border-color .15s, background .15s;background:#fff}
 .pg-design-yours .opt:hover{border-color:var(--gold)}
 .pg-design-yours .opt.sel{background:var(--navy);border-color:var(--navy);color:#fff}
@@ -37,16 +60,29 @@
 .pg-design-yours .preview .imgref{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 .pg-design-yours .preview .desc{font-size:14px;max-width:420px;color:#b9c5d1}
 .pg-design-yours .preview.haspic{padding:0;overflow:hidden;background:var(--navy)}
-.pg-design-yours .preview.haspic img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block;border-radius:8px}
+.pg-design-yours .preview.haspic img{width:100%;height:100%;min-height:inherit;object-fit:cover;display:block;border-radius:8px}
 .pg-design-yours .viewnote{margin-top:12px;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--gold-dark);text-align:right}
+.pg-design-yours .indicative{margin-top:10px;font-size:12px;line-height:1.5;color:var(--muted);background:var(--cream);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+
+/* --- Desktop: keep the preview in view while the option list scrolls. Step 3
+   has five wall finishes, so the left column outgrows the preview and the image
+   scrolled away exactly when the user was comparing finishes.
+   Gated on min-height:700px — on a short laptop window a sticky column taller
+   than the viewport pins its own bottom off-screen and can never be scrolled to.
+   920.02px rather than 921px so fractional viewports (browser zoom, Windows
+   display scaling) don't fall into a gap between the two breakpoints. --- */
+@media(min-width:920.02px){
+  .pg-design-yours .preview{min-height:clamp(360px,48vh,520px)}
+}
+@media(min-width:920.02px) and (min-height:700px){
+  .pg-design-yours .right{position:sticky;top:var(--sticky-top);align-self:start}
+}
 .pg-design-yours .controls{display:flex;justify-content:space-between;align-items:center;padding:20px 30px;border-top:1px solid var(--line);background:#fdfbf7}
 .pg-design-yours .btn{border:none;border-radius:5px;padding:13px 30px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Source Sans 3',sans-serif;letter-spacing:.3px}
 .pg-design-yours .btn.gold{background:var(--gold);color:var(--navy)}
 .pg-design-yours .btn.gold:hover{background:var(--gold-dark);color:#fff}
 .pg-design-yours .btn.ghost{background:none;border:1px solid var(--line);color:var(--muted)}
 .pg-design-yours .btn:disabled{opacity:.4;cursor:not-allowed}
-.pg-design-yours .sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
-@media(max-width:640px){.pg-design-yours .sumgrid{grid-template-columns:1fr}}
 .pg-design-yours .sumrow{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);font-size:14px}
 .pg-design-yours .sumrow .k{color:var(--muted)}
 .pg-design-yours .sumrow .v{font-weight:600;text-align:right}
@@ -57,7 +93,6 @@
 .pg-design-yours .surveynote{display:flex;gap:10px;background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:13px;color:var(--muted);margin-top:14px}
 .pg-design-yours .surveynote b{color:var(--ink)}
 .pg-design-yours .resgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px}
-@media(max-width:920px){.pg-design-yours .resgrid{grid-template-columns:1fr}}
 .pg-design-yours .steps-included{list-style:none;margin-top:14px}
 .pg-design-yours .steps-included li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
 .pg-design-yours .steps-included .n{width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
@@ -68,7 +103,6 @@
 .pg-design-yours .field{margin-top:12px}
 .pg-design-yours .field label{font-size:12px;font-weight:600;color:var(--muted);display:block;margin-bottom:5px;letter-spacing:.3px}
 .pg-design-yours .field input{width:100%;border:1px solid var(--line);border-radius:5px;padding:11px 12px;font-size:14px;font-family:'Source Sans 3',sans-serif;background:#fff}
-.pg-design-yours .cardrow{display:flex;gap:10px}
 .pg-design-yours .demo{margin-top:14px;text-align:center;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-dark);border:1px dashed var(--gold);border-radius:4px;padding:7px}
 .pg-design-yours .tag.pendtag{color:var(--muted);border-style:dashed}
 .pg-design-yours .opt.sel .tag.pendtag{background:transparent;color:#b9c5d1;border-color:#4a5f75}
@@ -79,7 +113,9 @@
 .pg-design-yours .consent{display:flex;gap:9px;align-items:flex-start;margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.5;cursor:pointer}
 .pg-design-yours .consent input{margin-top:3px;flex:0 0 auto;accent-color:var(--gold)}
 .pg-design-yours .formerr{color:#b3261e;font-size:12.5px;margin-top:10px;min-height:1px}
-.pg-design-yours .legal{font-size:12px;color:var(--muted);margin-top:16px;line-height:1.6}
+/* renamed from .legal — that class is the site footer block in chrome.css and was
+   leaking a navy border-top, 1200px max-width and auto margins into this paragraph */
+.pg-design-yours .legalnote{font-size:12px;color:var(--muted);margin-top:16px;line-height:1.6}
 .pg-design-yours .successspec{max-width:400px;margin:26px auto 0;text-align:left;border-top:1px solid var(--line)}
 .pg-design-yours .successspec div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
 .pg-design-yours .successspec span{color:var(--muted)}
@@ -88,3 +124,41 @@
 .pg-design-yours .success h2{color:var(--navy);font-size:28px}
 .pg-design-yours .success p{color:var(--muted);max-width:520px;margin:12px auto 0;font-size:15px}
 .pg-design-yours .draftnote{max-width:1180px;margin:0 auto 50px;padding:0 24px;font-size:12px;color:var(--muted);text-align:center}
+
+/* ------------------------------------------------------------------
+   Mobile (<=920px)
+   The single-column stack previously put the preview image BELOW the option
+   list, so tapping a finish produced no visible change without scrolling —
+   the whole point of a configurator. Preview now leads, options follow, and
+   the step controls stay pinned so Back / Next are always one tap away.
+------------------------------------------------------------------- */
+@media(max-width:920px){
+  .pg-design-yours .body{grid-template-columns:1fr;min-height:0}
+  .pg-design-yours .sumbody{grid-template-columns:1fr}
+  .pg-design-yours .resgrid{grid-template-columns:1fr}
+  .pg-design-yours .right{order:-1;padding:18px 18px 0}
+  .pg-design-yours .left{order:0;border-right:none;border-top:1px solid var(--line);padding:20px 18px 24px}
+  .pg-design-yours .preview{min-height:210px}
+  .pg-design-yours .viewnote{text-align:left}
+  .pg-design-yours .head{padding:34px 20px 78px}
+  .pg-design-yours .shell{margin-top:-44px;padding:0 14px}
+  .pg-design-yours .stepbar{padding:16px 18px}
+  .pg-design-yours .respad{padding:20px 18px}
+  .pg-design-yours .paybox{padding:18px}
+  .pg-design-yours .controls{position:sticky;bottom:0;z-index:5;padding:12px 18px;gap:10px;box-shadow:0 -6px 18px rgba(13,33,55,.10)}
+  .pg-design-yours .controls .btn{flex:1;padding:14px 12px}
+  /* Give the gold Next the visual weight — an equal-width ghost Back next to it
+     flattens the CTA hierarchy on a narrow screen. */
+  .pg-design-yours .controls .btn.ghost{flex:0 1 40%}
+  /* The reserve step must NOT get a sticky bar: its only control is a ghost
+     "Back to summary", which would sit full width in the primary-CTA position
+     and, being opaque with z-index, would cover the form's real submit button. */
+  .pg-design-yours .controls.backonly{position:static;box-shadow:none;justify-content:flex-start}
+  .pg-design-yours .controls.backonly .btn{flex:0 0 auto}
+}
+@media(max-width:420px){
+  .pg-design-yours .opt{padding:13px 14px;gap:10px}
+  .pg-design-yours .opt .thumb{width:70px;height:52px}
+  .pg-design-yours .band .price{font-size:27px}
+  .pg-design-yours .fee{font-size:30px}
+}
