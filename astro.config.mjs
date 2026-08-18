@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://luxurymodules.co.uk', // confirm after domain consolidation decision
@@ -8,4 +9,9 @@ export default defineConfig({
   // One convention, enforced in all three places, so no URL is reachable twice.
   trailingSlash: 'always',
   integrations: [sitemap()],
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 });
