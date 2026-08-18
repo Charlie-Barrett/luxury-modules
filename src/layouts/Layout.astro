@@ -1,5 +1,6 @@
 ---
 import '../styles/chrome.css';
+import SpeedInsights from '@vercel/speed-insights/astro';
 interface Props {
   title: string;
   description?: string;
@@ -59,6 +60,7 @@ const ogDescription = share || description;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "y155ou003q");
 </script>
+<SpeedInsights />
 </head>
 <body>
 <header class="site">
