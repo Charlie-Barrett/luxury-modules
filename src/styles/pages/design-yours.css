@@ -123,7 +123,9 @@
 .pg-design-yours .success .tick{width:64px;height:64px;border-radius:50%;background:var(--ok);color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
 .pg-design-yours .success h2{color:var(--navy);font-size:28px}
 .pg-design-yours .success p{color:var(--muted);max-width:520px;margin:12px auto 0;font-size:15px}
-.pg-design-yours .draftnote{max-width:1180px;margin:0 auto 50px;padding:0 24px;font-size:12px;color:var(--muted);text-align:center}
+/* .draftnote removed 18 Aug 2026 — the internal review note it styled has been
+   deleted from the partial now that the Steel roof and Light hexagon renders exist.
+   Rule kept out deliberately: no markup uses it. */
 
 /* ------------------------------------------------------------------
    Mobile (<=920px)
