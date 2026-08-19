@@ -142,7 +142,7 @@ const ogDescription = share || description;
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({fields:[{objectTypeId:'0-1',name:'firstname',value:fn},{objectTypeId:'0-1',name:'email',value:em}],context:{pageUri:location.href,pageName:document.title}})
     }).then(function(r){
-      if(r.ok){document.getElementById('brochure-body').innerHTML='<h3 class="serif" style="font-size:26px;color:var(--navy)">Thank you, '+fn.replace(/[<>&]/g,'')+'.</h3><p>The brochure is on its way to your inbox.</p>';}
+      if(r.ok){document.getElementById('brochure-body').innerHTML='<h3 class="serif" style="font-size:26px;color:var(--navy)">Thank you, '+fn.replace(/[<>&]/g,'')+'.</h3><p>We\'ll email you the 2026 brochure and price list within one working day.</p>';}
       else{return r.json().then(function(j){throw new Error((j.errors&&j.errors[0]&&j.errors[0].message)||('HTTP '+r.status));});}
     }).catch(function(err){
       btn.disabled=false;btn.textContent='Try again';
