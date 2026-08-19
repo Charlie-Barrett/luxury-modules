@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import '../../styles/components.css';
-const schema = {"@context": "https://schema.org", "@type": "Product", "name": "Garden Rooms", "description": "Insulated underground garden rooms", "brand": {"@type": "Brand", "name": "Revonia"}, "offers": {"@type": "AggregateOffer", "priceCurrency": "GBP", "lowPrice": "45000", "offerCount": 1}, "manufacturer": {"@type": "Organization", "name": "Luxury Modules", "url": "https://luxurymodules.co.uk", "description": "Official UK partner of Revonia. Turnkey vaulted living spaces, cellars and saunas."}};
+const schema = {"@context": "https://schema.org", "@type": "Product", "name": "Garden Rooms", "description": "Insulated underground garden rooms", "brand": {"@type": "Brand", "name": "Revonia"}, "offers": {"@type": "AggregateOffer", "priceCurrency": "GBP", "lowPrice": "45000", "offerCount": 1, "seller": {"@id": "https://luxurymodules.co.uk/#organization"}}, "manufacturer": {"@id": "https://luxurymodules.co.uk/#organization"}, "url": "https://luxurymodules.co.uk/spaces/garden-room/", "image": "https://luxurymodules.co.uk/images/og/spaces-garden-room.jpg"};
 ---
 <Layout title="Garden Rooms UK: Insulated & Underground | Luxury Modules" description="A garden room that outlives the house: earth-sheltered, insulated as standard and built for a century of use. Explore designs, sizes and from-pricing."  image="/images/og/spaces-garden-room.jpg" imageAlt="Aerial view of a dark stone-clad earth-sheltered garden room with arched glazing, a wide deck and a wood-fired hot tub in a pine clearing" share="A garden room that keeps its temperature: earth-sheltered, insulated and finished, ready to use the week it lands." schema={schema}>
 <div class="pagehero">

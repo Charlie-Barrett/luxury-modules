@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/pages/turnkey.css';
 import body from '../partials/turnkey.html?raw';
-const schema = null;
+const schema = {"@context": "https://schema.org", "@type": "Service", "@id": "https://luxurymodules.co.uk/turnkey/#service", "name": "Turnkey garden building design, planning and installation", "serviceType": "Design, planning, groundworks, delivery, installation and landscaping for earth sheltered garden buildings", "description": "One contract covering design, the planning application, site preparation, delivery, installation, utility connections and landscaping.", "provider": {"@id": "https://luxurymodules.co.uk/#organization"}, "areaServed": {"@type": "Country", "name": "United Kingdom"}, "url": "https://luxurymodules.co.uk/turnkey/"};
 ---
 <Layout title="Turnkey Garden Rooms: Everything Included | Luxury Modules" description="What turnkey actually means: groundworks, install, connections, finish and planning, all handled. Compare what is included module by module."  image="/images/og/turnkey.jpg" imageAlt="A finished stone-clad module with arched doors and a curved dark roof, lit from within, a couple sitting by a firepit on the deck" share="Turnkey means groundworks, install, connections, finishes and planning. The list of what is included is on this page." schema={schema}>
   <div class="pg-turnkey"><Fragment set:html={body} /></div>

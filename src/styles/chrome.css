@@ -9,6 +9,18 @@
   --gold-dark:#8a6d24; /* darker gold for text on cream, AA contrast */
   --ok:#4a5d43;        /* success green, same as --green */
 }
+/* Added 18 Aug 2026. The `*{margin:0;padding:0;box-sizing:border-box}` reset lives
+   in components.css, which 9 of the 24 pages never import — including the homepage.
+   On those pages the browser's default `body{margin:8px}` survived, so the whole
+   site sat inside an 8px light frame: visible as a pale strip down both edges and
+   above the navy header, and it made the sticky header 16px narrower than the
+   viewport.
+
+   Deliberately margin and padding ONLY. box-sizing is NOT set globally here: index,
+   turnkey, hobbit-houses and small-living-spaces size their hero inners with
+   `max-width:1200px; padding:0 24px`, and border-box would narrow those by 48px.
+   Those four need their own review before a site-wide box-sizing change. */
+html,body{margin:0;padding:0}
 body{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;font-size:17px}
 h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600}
 header.site{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50}

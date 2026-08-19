@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import '../../styles/components.css';
-const schema = {"@context": "https://schema.org", "@type": "Product", "name": "Garden Office Pods", "description": "Insulated turnkey garden office pods", "brand": {"@type": "Brand", "name": "Revonia"}, "offers": {"@type": "AggregateOffer", "priceCurrency": "GBP", "lowPrice": "45000", "offerCount": 1}, "manufacturer": {"@type": "Organization", "name": "Luxury Modules", "url": "https://luxurymodules.co.uk", "description": "Official UK partner of Revonia. Turnkey vaulted living spaces, cellars and saunas."}};
+const schema = {"@context": "https://schema.org", "@type": "Product", "name": "Garden Office Pods", "description": "Insulated turnkey garden office pods", "brand": {"@type": "Brand", "name": "Revonia"}, "offers": {"@type": "AggregateOffer", "priceCurrency": "GBP", "lowPrice": "45000", "offerCount": 1, "seller": {"@id": "https://luxurymodules.co.uk/#organization"}}, "manufacturer": {"@id": "https://luxurymodules.co.uk/#organization"}, "url": "https://luxurymodules.co.uk/spaces/garden-office/", "image": "https://luxurymodules.co.uk/images/og/spaces-garden-office.jpg"};
 ---
 <Layout title="Garden Office Pods &amp; Garden Studios | Luxury Modules" description="A garden office pod you can use all year: fully insulated, underfloor heating, installed with planning handled. From-pricing, sizes and floorplans."  image="/images/og/spaces-garden-office.jpg" imageAlt="A vaulted garden office interior with a floating timber desk, monitor and task chair, a sofa and a compact kitchenette" share="A garden office with power, data, heating and acoustic separation from the house — not a shed with a socket." schema={schema}>
 <div class="pagehero">

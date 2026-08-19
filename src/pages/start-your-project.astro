@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/pages/qualify.css';
 import body from '../partials/qualify.html?raw';
-const schema = null;
+const schema = {"@context": "https://schema.org", "@type": "WebPage", "@id": "https://luxurymodules.co.uk/start-your-project/#webpage", "url": "https://luxurymodules.co.uk/start-your-project/", "name": "Start your project: 2-minute project checker", "description": "Three questions on your land, planning and budget, then an honest answer on whether an underground garden room, cellar or sauna is possible for you.", "isPartOf": {"@id": "https://luxurymodules.co.uk/#website"}, "about": {"@id": "https://luxurymodules.co.uk/#organization"}, "inLanguage": "en-GB"};
 ---
 <Layout title="Start Your Project: 2-Minute Checker | Luxury Modules" description="Three quick questions on your land, planning and budget, then an honest answer on whether an underground garden room, cellar or sauna is possible for you."  image="/images/og/start-your-project.jpg" imageAlt="A Modular 60 with a shingled arched facade and grass roof, opening onto a timber deck among pine trees" share="Three questions on your land, planning and budget, then a straight answer on whether this is possible for you." schema={schema}>
   <div class="pg-qualify"><Fragment set:html={body} /></div>

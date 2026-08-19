@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/pages/contact.css';
 import body from '../partials/contact.html?raw';
-const schema = null;
+const schema = {"@context": "https://schema.org", "@type": "ContactPage", "@id": "https://luxurymodules.co.uk/book-a-call/#contact", "url": "https://luxurymodules.co.uk/book-a-call/", "name": "Book a scoping call with Luxury Modules", "description": "A free scoping call on your site, planning position and budget.", "isPartOf": {"@id": "https://luxurymodules.co.uk/#website"}, "about": {"@id": "https://luxurymodules.co.uk/#organization"}, "inLanguage": "en-GB", "mainEntity": {"@type": "Organization", "@id": "https://luxurymodules.co.uk/#organization"}};
 ---
 <Layout title="Contact | Luxury Modules | Book a Scoping Call" description="Book a free 20-minute scoping call with Luxury Modules. Your land, planning position and budget — honest answers on what's possible and what it costs."  image="/images/og/book-a-call.jpg" imageAlt="A stone-clad module lit from within at dusk, a couple sitting and talking by a firepit on the deck" share="Twenty minutes with Stuart on your land, your planning position and your budget. Honest answers, no pitch." schema={schema}>
   <div class="pg-contact"><Fragment set:html={body} /></div>

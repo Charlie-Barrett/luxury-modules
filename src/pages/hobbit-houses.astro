@@ -2,14 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/pages/hobbit-houses.css';
 import body from '../partials/hobbit-houses.html?raw';
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Hobbit Houses (Earth-Sheltered Buildings)",
-  "brand": {"@type": "Brand", "name": "Luxury Modules"},
-  "description": "Turnkey earth-sheltered hobbit-style houses, cellars, saunas and garden rooms: design, planning, groundworks, installation and fit-out by one UK team. 25-year structural warranty.",
-  "offers": {"@type": "AggregateOffer", "priceCurrency": "GBP", "lowPrice": "25000", "highPrice": "199000", "offerCount": "5"}
-};
+const schema = {"@context": "https://schema.org", "@type": "Product", "name": "Hobbit Houses (Earth-Sheltered Buildings)", "brand": {"@type": "Brand", "name": "Luxury Modules"}, "description": "Turnkey earth-sheltered hobbit-style houses, cellars, saunas and garden rooms: design, planning, groundworks, installation and fit-out by one UK team. 25-year structural warranty.", "offers": {"@type": "AggregateOffer", "priceCurrency": "GBP", "lowPrice": "25000", "highPrice": "199000", "offerCount": "5", "seller": {"@id": "https://luxurymodules.co.uk/#organization"}}, "url": "https://luxurymodules.co.uk/hobbit-houses/", "image": "https://luxurymodules.co.uk/images/og/hobbit-houses.jpg", "manufacturer": {"@id": "https://luxurymodules.co.uk/#organization"}};
 ---
 <Layout title="Hobbit Houses UK for Sale: Turnkey | Luxury Modules" description="Yes, hobbit houses are real, and you can have one in your garden. Earth-sheltered, fully insulated and delivered turnkey, with planning handled."  image="/images/og/hobbit-houses.jpg" imageAlt="A stone-fronted hobbit house set into a grassy bank in a pine forest, arched glazed door lit warm from inside, firepit and gravel drive" share="Hobbit houses that are properly built: insulated, serviced, warranted and signed off — not a folly at the end of the garden." schema={schema}>
   <div class="pg-hobbit-houses"><Fragment set:html={body} /></div>
