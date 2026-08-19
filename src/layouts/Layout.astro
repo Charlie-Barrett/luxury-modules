@@ -33,6 +33,9 @@ const ogDescription = share || description;
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" type="image/png" href="/favicon-48.png" sizes="48x48" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <title>{title}</title>
 {description && <meta name="description" content={description} />}
 {noindex && <meta name="robots" content="noindex, follow" />}
@@ -53,6 +56,14 @@ const ogDescription = share || description;
 <script is:inline id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="d376d24e-91fd-4bff-a1c4-00867f89529e" data-blockingmode="auto" type="text/javascript"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
 {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+<!-- Google tag (gtag.js) — blocked until Cookiebot statistics consent, same as Clarity -->
+<script is:inline type="text/plain" data-cookieconsent="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-XVZG3PT397"></script>
+<script is:inline type="text/plain" data-cookieconsent="statistics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XVZG3PT397');
+</script>
 <script is:inline type="text/plain" data-cookieconsent="statistics">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
