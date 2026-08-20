@@ -31,9 +31,13 @@
 .pg-index .gold-rule{width:64px;height:3px;background:var(--gold);margin:18px 0 26px}
 .pg-index .uses{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:12px}
 .pg-index .diff{font-size:14px;font-weight:600;color:var(--gold);margin-top:6px}
-.pg-index .hero{position:relative;height:82vh;min-height:560px;display:flex;align-items:center;color:#fff}
+/* min-height, not height (fixed 20 Aug 2026): a fixed 82vh let long-text
+   renderings (Android font boosting, large system fonts) overflow the hero
+   onto the trust bar. min-height lets the section grow; the absolutely
+   positioned image grows with it. */
+.pg-index .hero{position:relative;min-height:max(560px,82vh);display:flex;align-items:center;color:#fff}
 .pg-index .hero .imgph{position:absolute;inset:0}
-.pg-index .hero .inner{position:relative;max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
+.pg-index .hero .inner{position:relative;max-width:1200px;margin:0 auto;padding:56px 24px;width:100%}
 .pg-index .hero h1{font-size:clamp(40px,5.4vw,68px);line-height:1.08;max-width:900px;font-weight:700;text-shadow:0 2px 20px rgba(0,0,0,.45)}
 .pg-index .hero p{font-size:19px;max-width:560px;margin:20px 0 32px;text-shadow:0 1px 12px rgba(0,0,0,.5)}
 .pg-index .hero .badge{display:inline-block;border:1px solid var(--gold);color:var(--gold2);letter-spacing:.2em;text-transform:uppercase;font-size:12px;padding:8px 16px;margin-bottom:22px;background:rgba(22,34,59,.55)}
@@ -45,6 +49,15 @@
 .pg-index .trust .stat:nth-child(3){grid-column:1/-1}
 .pg-index .trust .stat b{font-size:28px}
 .pg-index .trust .stat span{font-size:11.5px}}
+/* Mobile hero typography (added 20 Aug 2026): the clamp() floor of 40px gave an
+   8-line headline on a 360px phone. Stack the CTAs properly instead of relying
+   on &nbsp; spacing. */
+@media(max-width:600px){
+.pg-index .hero h1{font-size:32px;line-height:1.14}
+.pg-index .hero p{font-size:17px;margin:16px 0 26px}
+.pg-index .hero .inner{padding:44px 24px}
+.pg-index .hero .btn{display:block;width:fit-content;margin-bottom:14px}
+}
 .pg-index .steps{counter-reset:s}
 .pg-index .step{background:#fff;border:1px solid #e5e0d5;padding:28px;border-radius:3px}
 .pg-index .step .num{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--gold);line-height:1}

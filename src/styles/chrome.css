@@ -21,6 +21,12 @@
    `max-width:1200px; padding:0 24px`, and border-box would narrow those by 48px.
    Those four need their own review before a site-wide box-sizing change. */
 html,body{margin:0;padding:0}
+/* Added 20 Aug 2026: Android Chrome "font boosting" inflates text it deems too
+   small, which blew the fixed-height homepage hero open (CTAs overlapped the
+   trust bar) and distorted the header on Stu's phone. text-size-adjust:100%
+   disables that inflation; our type is already sized for mobile. Deliberately
+   NOT a box-sizing change — see note above. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;font-size:17px}
 h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600}
 header.site{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50}
@@ -51,6 +57,9 @@ footer.site a{color:var(--gold2);text-decoration:none}
 @media(max-width:900px){header.site .navwrap{padding:12px 18px}
 .logo .lm{font-size:15px;letter-spacing:.16em;white-space:nowrap}
 .logo .tag{font-size:8.5px}
+/* Hard-cap the logo mark on mobile: belt-and-braces against any UA scaling
+   pushing it out of the navy bar (seen on Android, 20 Aug 2026). */
+header.site .navwrap img{height:38px !important;max-height:38px;width:auto;flex-shrink:0}
 header.site{position:sticky}}
 @media(max-width:1220px){.burger{display:block}
 nav.main{display:none;position:absolute;top:100%;left:0;right:0;background:var(--navy);flex-direction:column;padding:6px 18px 18px;border-top:1px solid rgba(232,235,242,.12);box-shadow:0 14px 30px rgba(0,0,0,.35)}
