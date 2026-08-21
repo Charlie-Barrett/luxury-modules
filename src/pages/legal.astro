@@ -1,0 +1,115 @@
+---
+/* DRAFT — 20 Aug 2026. Combines the privacy notice, cookie policy and website
+   terms on one page (audit finding 1). NOT legal advice and NOT signed off:
+   Stuart Doust to review, confirm retention periods, confirm the registered
+   office address, and check the processor list matches what the business does.
+
+   /privacy/, /cookies/ and /terms/ are kept as 308 redirects to the anchors
+   below (see vercel.json) so external links and the Cookiebot dashboard link
+   keep working. Point Cookiebot at /legal/#cookies.
+
+   The Terms section is deliberately WEBSITE terms only. Supply-of-goods terms,
+   deposits, cancellation rights and warranty terms for an actual module
+   purchase need a solicitor and must match the contract Luxury Modules issues. */
+import Layout from '../layouts/Layout.astro';
+import '../styles/components.css';
+const updated = '20 August 2026';
+---
+<Layout title="Legal: Privacy, Cookies & Terms | Luxury Modules" description="How Luxury Modules handles your personal data, what cookies this site sets, and the terms on which you use it." image="/images/og/index.jpg">
+<div class="pagehero">
+  <p class="kicker">Legal</p>
+  <h1>Privacy, cookies and terms</h1>
+  <p>How we handle your data, what this site stores on your device, and the basis on which you use it.</p>
+  <p style="font-size:13px;color:var(--muted);margin-top:10px">Last updated: {updated}</p>
+  <div style="margin-top:24px">
+    <a class="btn ghost" href="#privacy">Privacy Policy</a>
+    <a class="btn ghost" href="#cookies" style="margin-left:8px">Cookie Policy</a>
+    <a class="btn ghost" href="#terms" style="margin-left:8px">Terms &amp; Conditions</a>
+  </div>
+</div>
+
+<section><div class="wrap" style="max-width:820px">
+
+  <h2 id="privacy" style="scroll-margin-top:90px">Privacy Policy</h2><div class="gold-rule"></div>
+
+  <h3 style="margin-top:24px">Who we are</h3>
+  <p>Luxury Modules Limited is the data controller for the personal data described in this notice. We are registered in England and Wales, company number 16007852, with our registered office at 111-113 High Street, Evesham, Worcestershire, WR11 4XP.</p>
+  <p>For any question about this notice or about your personal data, contact us at <a href="mailto:sales@luxurymodules.co.uk">sales@luxurymodules.co.uk</a>.</p>
+
+  <h3 style="margin-top:28px">What we collect and why</h3>
+  <p>We collect only what we need to answer an enquiry and, where you ask us to, to design and quote for a project.</p>
+  <p><b>When you request the brochure</b> we collect your first name and email address, so that we can send you the brochure and price list.</p>
+  <p><b>When you book a scoping call</b> we collect your name, email address, phone number, the location of your land and any project detail you choose to give us, so that we can prepare for and hold that conversation.</p>
+  <p><b>When you use the module configurator</b> we collect your name, email address, phone number, installation postcode, your chosen specification and any notes you add, so that we can confirm the specification and issue a reservation invoice if you ask us to.</p>
+  <p><b>When you browse the site</b> and consent to statistics cookies, we collect analytics data about how the site is used. This is covered in the cookie section below.</p>
+
+  <h3 style="margin-top:28px">Our lawful basis</h3>
+  <p>For enquiries, scoping calls and configurator submissions we rely on <b>legitimate interests</b>: you have approached us about a project and we have a clear interest in responding. Where a project proceeds, we rely on <b>performance of a contract</b>.</p>
+  <p>For analytics cookies and for marketing emails beyond the material you asked for, we rely on <b>consent</b>, which you give through the cookie banner or by opting in, and which you can withdraw at any time.</p>
+
+  <h3 style="margin-top:28px">Who processes your data</h3>
+  <p>We do not sell personal data and we do not share it for third-party advertising. We use the following processors, each of which handles data on our instructions:</p>
+  <p><b>HubSpot</b> (HubSpot Ireland Limited) hosts our customer records and processes the three forms on this site. Data is held in HubSpot's EU infrastructure.</p>
+  <p><b>Google Analytics 4</b> (Google Ireland Limited) provides aggregate statistics about site usage, where you have consented to statistics cookies.</p>
+  <p><b>Microsoft Clarity</b> (Microsoft Ireland Operations Limited) provides aggregate usage and interaction analytics, where you have consented to statistics cookies.</p>
+  <p><b>Cookiebot</b> (Usercentrics A/S) records your consent choices so that we can demonstrate compliance.</p>
+  <p><b>Vercel</b> (Vercel Inc.) hosts this website and processes standard server request data.</p>
+  <p>Some of these providers may transfer data outside the UK. Where they do, transfers are covered by UK International Data Transfer Agreements, the EU Standard Contractual Clauses with the UK Addendum, or an adequacy decision.</p>
+
+  <h3 style="margin-top:28px">How long we keep it</h3>
+  <p>Enquiry and brochure records are kept for up to three years from your last contact with us, after which they are deleted. Records relating to a project we have delivered are kept for seven years to meet accounting and warranty obligations. Analytics data is retained according to the settings in each platform, currently up to fourteen months.</p>
+
+  <h3 style="margin-top:28px">Your rights</h3>
+  <p>Under UK GDPR you have the right to ask us for a copy of your personal data, to have inaccurate data corrected, to have data erased, to restrict or object to processing, and to receive your data in a portable format. Where we rely on consent, you can withdraw it at any time without affecting processing that has already taken place.</p>
+  <p>To exercise any of these rights, email <a href="mailto:sales@luxurymodules.co.uk">sales@luxurymodules.co.uk</a>. We will respond within one month.</p>
+  <p>If you are unhappy with how we have handled your data you can complain to the Information Commissioner's Office, the UK supervisory authority, at <a href="https://ico.org.uk" rel="noopener">ico.org.uk</a> or on 0303 123 1113. We would appreciate the chance to put things right first.</p>
+
+  <h2 id="cookies" style="margin-top:64px;scroll-margin-top:90px">Cookie Policy</h2><div class="gold-rule"></div>
+
+  <h3 style="margin-top:24px">The short version</h3>
+  <p>This site needs a small number of cookies to work. Everything beyond that is optional and is not set unless you agree to it through the banner shown on your first visit. We do not run advertising pixels and we do not sell your data.</p>
+
+  <h3 style="margin-top:28px">Categories we use</h3>
+  <p><b>Necessary.</b> Required for the site to function and to remember your consent choice. These are set without consent because the site cannot work without them. Cookiebot sets a consent record in this category.</p>
+  <p><b>Statistics.</b> Help us understand which pages are useful and where people get stuck. Google Analytics 4 and Microsoft Clarity sit here. Nothing in this category is set unless you accept it.</p>
+  <p><b>Marketing.</b> Cookiebot's scan classifies some of the cookies set by our analytics providers in this category. We do not run advertising campaigns from this site and we do not use these cookies to target advertising to you. Nothing in this category is set unless you accept it.</p>
+  <p>The banner lists every individual cookie, its provider, its purpose and its lifetime. That list is generated by an automatic scan of this site and is more current than any list we could maintain by hand here.</p>
+
+  <h3 style="margin-top:28px">Changing your mind</h3>
+  <p>You can withdraw or change consent at any time by reopening the cookie banner using the small consent icon on any page. You can also clear cookies in your browser settings, which will make the banner appear again on your next visit.</p>
+  <p>Refusing optional cookies does not limit any part of this site. Every page, form and the configurator work exactly the same either way.</p>
+
+  <h2 id="terms" style="margin-top:64px;scroll-margin-top:90px">Website Terms &amp; Conditions</h2><div class="gold-rule"></div>
+
+  <h3 style="margin-top:24px">Who you are dealing with</h3>
+  <p>This site is operated by Luxury Modules Limited, registered in England and Wales, company number 16007852, registered office 111-113 High Street, Evesham, Worcestershire, WR11 4XP. Contact: <a href="mailto:sales@luxurymodules.co.uk">sales@luxurymodules.co.uk</a>.</p>
+  <p>By using this site you accept these terms. If you do not accept them, please do not use the site.</p>
+
+  <h3 style="margin-top:28px">Pricing on this site</h3>
+  <p>All prices shown are indicative "from" prices, exclude VAT, and were last reviewed in January 2026. They are not an offer and do not form a contract.</p>
+  <p>Groundworks, access, site conditions, planning requirements and specification all affect the final figure, which is why a firm price follows a scoping call and site assessment rather than a web page. The guide bands shown in the module configurator are estimates on the same basis.</p>
+
+  <h3 style="margin-top:28px">The reservation fee</h3>
+  <p>Submitting a specification through the configurator is a request, not a purchase. Nothing is charged through this website. If you ask us to proceed, we will contact you to confirm the specification and issue an invoice for the reservation fee separately, and the terms of that reservation will be set out at that point.</p>
+
+  <h3 style="margin-top:28px">Imagery and specifications</h3>
+  <p>Photographs, renders and concept images on this site illustrate the range and the design language. They may show configurations, finishes, landscaping or locations that are not included in a standard specification, and some are concept renders rather than photographs of completed UK projects. What is included in your project is what appears in your written specification.</p>
+  <p>Dimensions, timescales and performance figures are typical rather than guaranteed, and are confirmed project by project.</p>
+
+  <h3 style="margin-top:28px">Planning and consents</h3>
+  <p>Guidance on this site about planning permission and permitted development is general information, not advice on your property. Planning outcomes depend on your site, your local authority and the details of your proposal. Where we manage a planning application for you, we will say so in writing, but we cannot guarantee a particular decision.</p>
+
+  <h3 style="margin-top:28px">Our content</h3>
+  <p>The content of this site, including text, imagery, layout and design, is owned by Luxury Modules Limited or used with permission from our manufacturing partner. You may view and print pages for your own use in considering a project. You may not republish or use our content commercially without our written permission.</p>
+  <p>Revonia is the trade mark of its owner and is used here to describe our partnership.</p>
+
+  <h3 style="margin-top:28px">Liability</h3>
+  <p>We take reasonable care to keep this site accurate and available, but we do not guarantee that it is error-free or uninterrupted. To the extent permitted by law, we are not liable for loss arising from reliance on general information published here, as distinct from a written specification, quotation or contract we have issued to you.</p>
+  <p>Nothing in these terms limits our liability for death or personal injury caused by negligence, for fraud, or for anything else that cannot lawfully be limited. If you are a consumer, these terms do not affect your statutory rights.</p>
+
+  <h3 style="margin-top:28px">Governing law</h3>
+  <p>These terms are governed by the law of England and Wales, and the courts of England and Wales have jurisdiction.</p>
+
+  <p style="margin-top:40px;font-size:13px;color:var(--muted)">We will update this page when our processing or these terms change, and the date at the top will change with it.</p>
+</div></section>
+</Layout>
