@@ -52,7 +52,19 @@ footer.site{background:var(--navy);color:#c7cede;padding:56px 24px 32px;font-siz
 footer.site a{color:var(--gold2);text-decoration:none}
 .foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
 @media(max-width:900px){.foot-grid{grid-template-columns:1fr}}
-.legal{max-width:1200px;margin:32px auto 0;border-top:1px solid #33415e;padding-top:20px;font-size:12px;color:#8b95ab}
+.legal{max-width:1200px;margin:32px auto 0;border-top:1px solid #33415e;padding-top:20px;font-size:12px;color:#8b95ab;line-height:2}
+/* Footer links as real lists, 20 Aug 2026 (audit finding 9). <br>-separated
+   anchors gave 20px touch targets, under the 24px WCAG 2.5.8 minimum. Block
+   anchors with vertical padding reach 44px. */
+.footlinks{list-style:none;margin:14px 0 0;padding:0}
+.footlinks li{margin:0}
+.footlinks li a{display:block;padding:11px 0;line-height:1.35;min-height:44px;box-sizing:border-box}
+.footlinks li.plain{padding:11px 0;line-height:1.35}
+footer.site a:hover{text-decoration:underline}
+footer.site a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.legal .builtby a{color:#8b95ab;text-decoration:underline}
+.legal .builtby a:hover{color:var(--gold2)}
+.legal .pending{opacity:.75;font-style:italic}
 .burger{display:none;background:none;border:1px solid rgba(232,235,242,.3);border-radius:3px;color:#e8ebf2;font-size:20px;line-height:1;padding:8px 12px;cursor:pointer}
 @media(max-width:900px){header.site .navwrap{padding:12px 18px}
 .logo .lm{font-size:15px;letter-spacing:.16em;white-space:nowrap}
@@ -88,3 +100,8 @@ nav.main .navsub-menu a{padding:11px 2px 11px 18px;font-size:14px}
 body.show-draft-notes .imgph .lbl{display:block}
 .imgph{position:relative;overflow:hidden}
 .imgph img.real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+
+/* Honeypot field, 20 Aug 2026 (audit finding 7). Hidden from humans and from
+   screen readers (aria-hidden + tabindex -1 on the input), but present in the
+   DOM for bots to fill. Not display:none, which some bots detect and skip. */
+.hp-field{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}

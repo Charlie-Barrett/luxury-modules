@@ -87,6 +87,7 @@ const INTERIORS = [
 ];
 
 const RESERVATION_FEE = 2000;
+const PAGE_OPENED = Date.now();
 
 /* HubSpot: EU1 portal 145893440, "Configurator — Reservation Request" form.
    Internal notification to Stu is configured in the HubSpot form settings,
@@ -253,6 +254,7 @@ function reserveStep(){
           <div class="field"><label for="rf-phone">Phone</label><input id="rf-phone" name="phone" type="tel" required placeholder="07000 000000" autocomplete="tel"></div>
           <div class="field"><label for="rf-post">Installation postcode</label><input id="rf-post" name="zip" required placeholder="GL54 1AA" autocomplete="postal-code"></div>
           <div class="field"><label for="rf-notes">Anything we should know (optional)</label><input id="rf-notes" name="message" placeholder="Access, timescales, site notes"></div>
+          <div class="hp-field" aria-hidden="true"><label>Company website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
           <label class="consent"><input type="checkbox" id="rf-consent" required><span>I confirm this specification and would like Luxury Modules to issue my ${gbp(RESERVATION_FEE)} reservation invoice.</span></label>
           <div class="formerr" id="rf-err"></div>
           <button class="btn gold" style="width:100%;margin-top:14px" type="submit">Confirm and request my invoice</button>
@@ -299,6 +301,10 @@ function submitReservation(e){
   const err = document.getElementById('rf-err');
   const btn = f.querySelector('button[type=submit]');
   const v = k => (f.elements[k] ? f.elements[k].value.trim() : '');
+  /* Spam guards (20 Aug 2026): honeypot must be empty, and reaching step 6 of
+     the configurator takes far longer than 3s for a human. Fail silently. */
+  if (v('website')) return;
+  if (Date.now() - PAGE_OPENED < 3000) return;
   err.textContent = '';
 
   if(!v('fullname') || !v('email') || !v('phone') || !v('zip')){
@@ -341,8 +347,8 @@ function submitReservation(e){
         {objectTypeId:'0-1', name:'firstname', value:v('fullname').split(' ')[0]},
         {objectTypeId:'0-1', name:'lastname',  value:v('fullname').split(' ').slice(1).join(' ') || v('fullname')},
         {objectTypeId:'0-1', name:'email',     value:v('email')},
-        {objectTypeId:'0-1', name:'phone',     value:v('phone')},
-        {objectTypeId:'0-1', name:'zip',       value:v('zip')},
+        {objectTypeId:'0-1', name:'mobilephone', value:v('phone')},
+        {objectTypeId:'0-1', name:'where_is_your_land_postcode_or_area', value:v('zip')},
         {objectTypeId:'0-1', name:'message',   value:spec}
       ],
       context:hsContext()

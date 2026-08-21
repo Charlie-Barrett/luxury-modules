@@ -2,7 +2,7 @@
 .pg-hobbit-houses h1, .pg-hobbit-houses h2, .pg-hobbit-houses h3, .pg-hobbit-houses .serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600}
 .pg-hobbit-houses section{padding:72px 24px}
 .pg-hobbit-houses .wrap{max-width:1200px;margin:0 auto}
-.pg-hobbit-houses .kicker{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
+.pg-hobbit-houses .kicker{color:var(--gold-dark);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
 .pg-hobbit-houses h2{font-size:40px;color:var(--navy);margin-bottom:16px}
 .pg-hobbit-houses .lead{font-size:19.5px;color:#4b5563;max-width:720px}
 .pg-hobbit-houses .grid{display:grid;gap:24px}
@@ -53,7 +53,7 @@
 .pg-hobbit-houses .glamp .inner{position:relative;max-width:1200px;margin:0 auto;padding:110px 24px}
 .pg-hobbit-houses .glamp h2{color:#fff}
 .pg-hobbit-houses .step{background:#fff;border:1px solid #e5e0d5;padding:28px;border-radius:3px}
-.pg-hobbit-houses .step .num{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--gold);line-height:1}
+.pg-hobbit-houses .step .num{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--gold-dark);line-height:1}
 .pg-hobbit-houses .step h3{font-weight:700;font-size:26px;margin:10px 0 8px;color:var(--navy)}
 .pg-hobbit-houses .qbanner{background:linear-gradient(rgba(22,34,59,.88),rgba(22,34,59,.88));color:#fff;text-align:center}
 .pg-hobbit-houses .qbanner h2{color:#fff;font-size:44px}
@@ -76,3 +76,5 @@
 .pg-hobbit-houses .faq details p{padding:0 0 20px;font-size:15.5px;color:#4b5563;max-width:860px}
 .pg-hobbit-houses .truststrip{display:flex;justify-content:center;gap:14px 34px;flex-wrap:wrap;margin-top:34px;padding-top:26px;border-top:1px solid rgba(224,188,106,.3);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#c7cede}
 .pg-hobbit-houses .truststrip b{color:var(--gold2)}
+/* Contrast fix 20 Aug 2026: restore brand gold for kickers on navy. */
+.pg-hobbit-houses .navy-band .kicker, .pg-hobbit-houses .qbanner .kicker, .pg-hobbit-houses .hero .kicker{color:var(--gold2)}

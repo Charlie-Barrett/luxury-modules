@@ -5,7 +5,7 @@
 .pg-index .imgph .ico{font-size:40px;opacity:.35}
 .pg-index section{padding:72px 24px}
 .pg-index .wrap{max-width:1200px;margin:0 auto}
-.pg-index .kicker{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
+.pg-index .kicker{color:var(--gold-dark);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
 .pg-index h2{font-size:40px;color:var(--navy);margin-bottom:16px}
 .pg-index .lead{font-size:19.5px;color:#4b5563;max-width:720px}
 .pg-index .grid{display:grid;gap:24px}
@@ -14,6 +14,11 @@
 .pg-index .cols4{grid-template-columns:repeat(4,1fr)}
 @media(max-width:900px){.pg-index .cols3, .pg-index .cols4, .pg-index .cols2{grid-template-columns:1fr}}
 .pg-index .card{background:#fff;border:1px solid #e5e0d5;border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+/* Collection cards are links (20 Aug 2026): neutralise anchor styling, add a
+   hover lift and a visible keyboard focus ring. */
+.pg-index a.card{color:inherit;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
+.pg-index a.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.22)}
+.pg-index a.card:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .pg-index .card .imgph{height:210px}
 .pg-index .card .body{padding:22px;flex:1;display:flex;flex-direction:column}
 .pg-index .card h3{font-size:24px;color:var(--navy)}
@@ -60,7 +65,7 @@
 }
 .pg-index .steps{counter-reset:s}
 .pg-index .step{background:#fff;border:1px solid #e5e0d5;padding:28px;border-radius:3px}
-.pg-index .step .num{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--gold);line-height:1}
+.pg-index .step .num{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--gold-dark);line-height:1}
 .pg-index .step h3{font-weight:700;font-size:26px;margin:10px 0 8px;color:var(--navy)}
 .pg-index .qbanner{background:linear-gradient(rgba(22,34,59,.88),rgba(22,34,59,.88));color:#fff;text-align:center}
 .pg-index .qbanner h2{color:#fff;font-size:44px}
@@ -85,3 +90,5 @@
 .pg-index .vtl .tcard:before, .pg-index .vtl .tcard.bot:before{content:"" !important;display:block;position:absolute;left:-9px !important;top:1px !important;width:12px !important;height:12px !important;border-radius:50%;background:var(--navy) !important;border:3px solid var(--gold);box-shadow:0 0 0 4px rgba(201,162,75,.16);transform:none !important}
 .pg-index .vtl b{margin-bottom:2px}
 .pg-index .vtl h4{margin-bottom:3px}}
+/* Contrast fix 20 Aug 2026: restore brand gold for kickers on navy. */
+.pg-index .navy-band .kicker, .pg-index .qbanner .kicker, .pg-index .hero .kicker{color:var(--gold2)}

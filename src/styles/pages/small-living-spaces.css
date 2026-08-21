@@ -2,7 +2,7 @@
 .pg-small-living-spaces h1, .pg-small-living-spaces h2, .pg-small-living-spaces h3, .pg-small-living-spaces .serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600}
 .pg-small-living-spaces section{padding:72px 24px}
 .pg-small-living-spaces .wrap{max-width:1200px;margin:0 auto}
-.pg-small-living-spaces .kicker{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
+.pg-small-living-spaces .kicker{color:var(--gold-dark);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
 .pg-small-living-spaces h2{font-size:40px;color:var(--navy);margin-bottom:16px}
 .pg-small-living-spaces .lead{font-size:19.5px;color:#4b5563;max-width:720px}
 .pg-small-living-spaces .grid{display:grid;gap:24px}
@@ -58,3 +58,5 @@
 .pg-small-living-spaces .qbanner h2{color:#fff;font-size:44px}
 .pg-small-living-spaces .truststrip{display:flex;justify-content:center;gap:14px 34px;flex-wrap:wrap;margin-top:34px;padding-top:26px;border-top:1px solid rgba(224,188,106,.3);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#c7cede}
 .pg-small-living-spaces .truststrip b{color:var(--gold2)}
+/* Contrast fix 20 Aug 2026: restore brand gold for kickers on navy. */
+.pg-small-living-spaces .navy-band .kicker, .pg-small-living-spaces .qbanner .kicker, .pg-small-living-spaces .hero .kicker{color:var(--gold2)}

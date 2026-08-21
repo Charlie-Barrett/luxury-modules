@@ -104,11 +104,40 @@ const ogDescription = share || description;
   <div class="foot-grid">
     <div><div class="logo"><span class="lm">LUXURY MODULES</span><span class="tag">Official UK Partner of Revonia</span></div>
       <p style="margin-top:16px;font-size:13.5px;max-width:300px">Turnkey vaulted living spaces, cellars and saunas. 1,500+ projects across Europe. 25-year structural warranty. Planning handled.</p></div>
-    <div><b style="color:#fff">Explore</b><br /><br /><a href="/products/">Our Modules</a><br /><a href="/hobbit-houses/">Hobbit Houses</a><br /><a href="/pricing/">Pricing</a><br /><a href="/turnkey/">What's Included</a><br /><a href="/design-yours/">Design Your Module</a><br /><a href="/commercial/">For Commercial</a></div>
-    <div><b style="color:#fff">Learn</b><br /><br /><a href="/how-it-works/">How It Works</a><br /><a href="/planning-permission/">Planning Permission</a><br /><a href="/revonia/">The Revonia Partnership</a><br /><a href="/faq/">FAQs</a></div>
-    <div><b style="color:#fff">Contact</b><br /><br />Stuart Doust<br /><a href="mailto:sales@luxurymodules.co.uk">sales@luxurymodules.co.uk</a><br /><a href="tel:+447814550508">+44 7814 550 508</a><br /><br /><a href="/start-your-project/">Start Your Project</a></div>
+    <nav aria-labelledby="foot-explore"><b id="foot-explore" style="color:#fff">Explore</b>
+      <ul class="footlinks">
+        <li><a href="/products/">Our Modules</a></li>
+        <li><a href="/hobbit-houses/">Hobbit Houses</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/turnkey/">What's Included</a></li>
+        <li><a href="/design-yours/">Design Your Module</a></li>
+        <li><a href="/commercial/">For Commercial</a></li>
+      </ul></nav>
+    <nav aria-labelledby="foot-learn"><b id="foot-learn" style="color:#fff">Learn</b>
+      <ul class="footlinks">
+        <li><a href="/how-it-works/">How It Works</a></li>
+        <li><a href="/planning-permission/">Planning Permission</a></li>
+        <li><a href="/revonia/">The Revonia Partnership</a></li>
+        <li><a href="/faq/">FAQs</a></li>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/cookies/">Cookie Policy</a></li>
+        <li><a href="/terms/">Terms &amp; Conditions</a></li>
+      </ul></nav>
+    <div><b style="color:#fff">Contact</b>
+      <ul class="footlinks">
+        <li class="plain">Stuart Doust</li>
+        <li><a href="mailto:sales@luxurymodules.co.uk">sales@luxurymodules.co.uk</a></li>
+        <li><a href="tel:+447814550508">+44 7814 550 508</a></li>
+        <li><a href="/start-your-project/">Start Your Project</a></li>
+      </ul></div>
   </div>
-  <div class="legal">&copy; 2026 Luxury Modules Ltd. All prices are indicative "from" prices excluding VAT, updated January 2026.</div>
+  <div class="legal">&copy; 2026 Luxury Modules Ltd. All prices are indicative "from" prices excluding VAT, updated January 2026.<br />
+    <!-- Company number verified against Companies House, 20 Aug 2026. The address below is the
+         one Companies House lists for the company; Stu to confirm it is the registered office
+         and to supply the VAT number, then delete the "pending" span and add: VAT No. XXXXXXXXX. -->
+    Luxury Modules Limited, registered in England and Wales, company number 16007852. Registered office: 111-113 High Street, Evesham, Worcestershire, WR11 4XP. <span class="pending">(VAT number to be added.)</span><br />
+    <span class="builtby">Built by <a href="https://charliebarrett.co.uk" rel="noopener">CBC Ltd</a></span>
+  </div>
 </footer>
 <div id="brochure-modal" role="dialog" aria-modal="true" aria-labelledby="bm-title">
   <div class="bm-card">
@@ -119,6 +148,7 @@ const ogDescription = share || description;
       <form id="brochure-form">
         <label>First name<input type="text" name="firstname" required autocomplete="given-name" /></label>
         <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+        <div class="hp-field" aria-hidden="true"><label>Company website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
         <button type="submit">Send me the brochure</button>
         <p id="bm-err" class="bm-err"></p>
         <p class="bm-consent">We'll use your details to send the brochure and occasional project stories. No spam, unsubscribe anytime.</p>
@@ -145,8 +175,13 @@ const ogDescription = share || description;
   });
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&bmodal.classList.contains('open'))bmodal.classList.remove('open');});
   var bform=document.getElementById('brochure-form');
+  var bformOpened=Date.now();
   if(bform){bform.addEventListener('submit',function(e){
     e.preventDefault();
+    /* Spam guards (20 Aug 2026): honeypot must stay empty, and a real person
+       takes longer than 3s. Fail silently so bots learn nothing. */
+    if(bform.website && bform.website.value){return;}
+    if(Date.now()-bformOpened < 3000){return;}
     var fn=bform.firstname.value.trim(),em=bform.email.value.trim(),btn=bform.querySelector('button[type=submit]');
     btn.disabled=true;btn.textContent='Sending…';
     fetch('https://api-eu1.hsforms.com/submissions/v3/integration/submit/145893440/10337a2d-9ba9-49e8-8cb2-10535dc96348',{

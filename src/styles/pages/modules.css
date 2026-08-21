@@ -5,7 +5,7 @@
 .pg-modules .imgph .ico{font-size:40px;opacity:.35}
 .pg-modules section{padding:72px 24px}
 .pg-modules .wrap{max-width:1200px;margin:0 auto}
-.pg-modules .kicker{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
+.pg-modules .kicker{color:var(--gold-dark);letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:12px}
 .pg-modules h2{font-size:40px;color:var(--navy);margin-bottom:16px}
 .pg-modules .lead{font-size:19.5px;color:#4b5563;max-width:720px}
 .pg-modules .grid{display:grid;gap:24px}
@@ -44,3 +44,5 @@
 .pg-modules .extras{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
 .pg-modules .extras span{background:#fff;border:1px solid #e0d8c6;border-radius:20px;padding:8px 16px;font-size:13.5px;color:#4b5563}
 .pg-modules .vatnote{font-size:13px;color:var(--muted);margin-top:26px;font-style:italic}
+/* Contrast fix 20 Aug 2026: restore brand gold for kickers on navy. */
+.pg-modules .navy-band .kicker, .pg-modules .qbanner .kicker, .pg-modules .hero .kicker{color:var(--gold2)}
