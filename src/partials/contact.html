@@ -65,7 +65,7 @@
               {objectTypeId:'0-1',name:'tell_us_about_your_project',value:msg}
             ],context:{pageUri:location.href,pageName:document.title}})
           }).then(function(r){
-            if(r.ok){f.innerHTML='<h3 style="font-family:Cormorant Garamond,serif;font-size:28px;color:var(--navy)">Thank you, we\'ll be in touch within one working day.</h3>';}
+            if(r.ok){lmEvent('scoping_request',{form:'scoping',budget:f.budget.value,interest:f.dream.value});f.innerHTML='<h3 style="font-family:Cormorant Garamond,serif;font-size:28px;color:var(--navy)">Thank you, we\'ll be in touch within one working day.</h3>';}
             else{return r.json().then(function(j){throw new Error((j.errors&&j.errors[0]&&j.errors[0].message)||('HTTP '+r.status));});}
           }).catch(function(err){
             btn.disabled=false;btn.textContent='Try again';

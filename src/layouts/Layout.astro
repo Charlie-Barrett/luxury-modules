@@ -64,6 +64,11 @@ const ogDescription = share || description;
   gtag('js', new Date());
   gtag('config', 'G-XVZG3PT397');
 </script>
+<script is:inline>
+  window.lmEvent = function(name, params){
+    try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch(e){}
+  };
+</script>
 <script is:inline type="text/plain" data-cookieconsent="statistics">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -188,7 +193,7 @@ const ogDescription = share || description;
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({fields:[{objectTypeId:'0-1',name:'firstname',value:fn},{objectTypeId:'0-1',name:'email',value:em}],context:{pageUri:location.href,pageName:document.title}})
     }).then(function(r){
-      if(r.ok){document.getElementById('brochure-body').innerHTML='<h3 class="serif" style="font-size:26px;color:var(--navy)">Thank you, '+fn.replace(/[<>&]/g,'')+'.</h3><p>We\'ll email you the 2026 brochure and price list within one working day.</p>';}
+      if(r.ok){lmEvent('brochure_request',{form:'brochure',page:location.pathname});document.getElementById('brochure-body').innerHTML='<h3 class="serif" style="font-size:26px;color:var(--navy)">Thank you, '+fn.replace(/[<>&]/g,'')+'.</h3><p>We\'ll email you the 2026 brochure and price list within one working day.</p>';}
       else{return r.json().then(function(j){throw new Error((j.errors&&j.errors[0]&&j.errors[0].message)||('HTTP '+r.status));});}
     }).catch(function(err){
       btn.disabled=false;btn.textContent='Try again';

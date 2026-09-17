@@ -92,6 +92,7 @@
 const state={land:null,planning:null,budget:null};
 function answer(k,v){
   state[k]=v;
+  lmEvent('qualify_step',{step:k,answer:v});
   if(k==='land'){ v==='none' ? showResult('res-noland') : goTo(2); }
   else if(k==='planning'){ goTo(3); }
   else if(k==='budget'){ v==='b1' ? showResult('res-budget') : showQualified(); }
@@ -105,6 +106,7 @@ function goTo(n){
 function showResult(id){
   ['step1','step2','step3','res-qualified','res-noland','res-budget'].forEach(x=>document.getElementById(x).classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
+  lmEvent('qualify_complete',{result:id,land:state.land,planning:state.planning,budget:state.budget});
   for(let i=1;i<=3;i++) document.getElementById('pb'+i).classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});
 }

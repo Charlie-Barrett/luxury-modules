@@ -354,7 +354,7 @@ function submitReservation(e){
       context:hsContext()
     })
   }).then(function(res){
-    if(res.ok){ go(7); return; }
+    if(res.ok){ lmEvent('design_request',{form:'design'}); go(7); return; }
     return res.json().then(function(j){
       /* HubSpot 400s if a submitted field is not defined on the form.
          Log every field error so a form/field mismatch is obvious in console. */
